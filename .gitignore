@@ -26,6 +26,9 @@ dist/
 # JetBrains IDE
 .idea/
 
+### VS Code ###
+.vscode/
+
 # Unit test reports
 TEST*.xml
 
@@ -50,3 +53,8 @@ Thumbs.db
 
 # SBT
 .bsp/
+
+# Scala Metals
+.bloop/
+.metals/
+.project/
