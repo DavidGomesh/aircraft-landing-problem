@@ -3,7 +3,7 @@ package pj.domain.model
 import pj.domain.simpleTypes.PositiveInteger
 
 final case class Agenda(
-    aircrafts: Aircrafts, 
-    runways: Runways,
+    aircrafts: List[Aircraft], 
+    runways: List[Runway],
     maximumDelayTime: PositiveInteger
 )
