@@ -2,10 +2,38 @@ package pj.domain.simpleTypes
 
 import pj.domain.Result
 import pj.domain.DomainError.IllegalArgumentError
+import scala.annotation.targetName
 
 opaque type ClassType = Byte
 
 object ClassType:
     def apply(classType: Byte): Result[ClassType] =
-        if (1 to 6 contains classType) Right(classType) 
+        if (Array.range(1, 7) contains classType) Right(classType)
         else Left(IllegalArgumentError("Invalid class type"))
+
+extension (classType: ClassType)
+
+    @targetName("ClassType.to")
+    def to: Byte = classType
+    
+    @targetName("ClassType.getGapOperation")
+    def getGapOperation(trailing: ClassType): Int =
+        val times = Array(
+
+            // Landing             Take-off
+            //    S    L    H      S   L   H
+            Array(82,  69,  60,    75, 75, 75),
+            Array(131, 69,  60,    75, 75, 75),
+            Array(196, 157, 96,    75, 75, 75),
+            
+            // Landing             Take-off
+            //    S    L    H      S   L   H
+            Array(60,  60,  60,    60, 60, 60),
+            Array(60,  60,  60,    60, 60, 60),
+            Array(60,  60,  60,    120, 120, 90)
+
+        )
+
+        val classLeading = classType.to
+        val classTrailing = trailing.to
+        times(classLeading - 1)(classTrailing - 1)
