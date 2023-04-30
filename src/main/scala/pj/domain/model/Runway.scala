@@ -21,3 +21,11 @@ final case class Runway(
         classes.contains(aircraft.classType)
     }
 }
+
+object Runway {
+    def isCompatible(aircraft: Aircraft, runways: List[Runway]): Boolean = {
+        runways.foldLeft(false)((isCompatible, runway) => {
+            isCompatible || runway.isCompatible(aircraft)
+        })
+    }
+}
