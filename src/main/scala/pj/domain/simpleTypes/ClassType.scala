@@ -12,28 +12,14 @@ object ClassType:
         else Left(IllegalArgumentError("Invalid class type"))
 
 extension (classType: ClassType)
-
-    @targetName("ClassType.to")
-    def to: Byte = classType
-    
-    @targetName("ClassType.getGapOperation")
-    def getGapOperation(trailing: ClassType): Int =
+    @targetName("ClassType.gap")
+    def gap(trailing: ClassType): Int =
         val times = Array(
-
-            // Landing             Take-off
-            //    S    L    H      S   L   H
-            Array(82,  69,  60,    75, 75, 75),
-            Array(131, 69,  60,    75, 75, 75),
-            Array(196, 157, 96,    75, 75, 75),
-            
-            // Landing             Take-off
-            //    S    L    H      S   L   H
-            Array(60,  60,  60,    60, 60, 60),
-            Array(60,  60,  60,    60, 60, 60),
-            Array(60,  60,  60,    120, 120, 90)
-
+            Array(82,  69,  60,  75, 75, 75),
+            Array(131, 69,  60,  75, 75, 75),
+            Array(196, 157, 96,  75, 75, 75),
+            Array(60,  60,  60,  60, 60, 60),
+            Array(60,  60,  60,  60, 60, 60),
+            Array(60,  60,  60,  120,120,90),
         )
-
-        val classLeading = classType.to
-        val classTrailing = trailing.to
-        times(classLeading - 1)(classTrailing - 1)
+        times(classType - 1)(trailing - 1)
