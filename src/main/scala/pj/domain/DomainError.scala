@@ -7,3 +7,6 @@ enum DomainError:
   case XMLError(error: String)
   
   case IllegalArgumentError(error: String)
+  case AllRunwaysUnavaliable(error: String)
+  
+  case Error(error: String)
