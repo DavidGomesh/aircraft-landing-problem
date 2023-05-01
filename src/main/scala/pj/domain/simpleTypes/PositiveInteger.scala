@@ -13,5 +13,7 @@ object PositiveInteger:
         else Left(IllegalArgumentError("Invalid positive integer"))
 
 extension (number: PositiveInteger)
+    @targetName("PositiveInteger.to")
+    def to: Int = number
     @targetName("PositiveInteger.lessOrEquals")
     def <=(other: PositiveInteger): Boolean = number <= other

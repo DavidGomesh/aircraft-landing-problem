@@ -16,3 +16,5 @@ extension (number: NonNegativeInteger)
     def +(other: NonNegativeInteger): NonNegativeInteger = number + other
     @targetName("NonNegativeInteger.sub")
     def -(other: NonNegativeInteger): NonNegativeInteger = number - other
+    @targetName("NonNegativeInteger.greaterThan")
+    def >(other: NonNegativeInteger): Boolean = number > other

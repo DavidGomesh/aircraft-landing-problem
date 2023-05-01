@@ -3,7 +3,6 @@ package pj.io
 import pj.domain.Result
 import pj.domain.model.Agenda
 import pj.domain.model.Aircraft
-import pj.domain.model.Handles
 import pj.domain.model.Runway
 import pj.domain.simpleTypes.ClassType
 import pj.domain.simpleTypes.Identifier
@@ -40,22 +39,22 @@ def xmlToAircraft(aircraft: Node): Result[Aircraft] =
         id <- fromAttribute(aircraft, "id").flatMap(id => Identifier(id))
         classType <- fromAttribute(aircraft, "class").flatMap(c => ClassType(c.toByte))
         target <- fromAttribute(aircraft, "target").flatMap(t => NonNegativeInteger(t.toInt))
+        time <- NonNegativeInteger(0)
 
         emergency <- Right(fromAttribute(aircraft, "emergency")
             .flatMap(e => PositiveInteger(e.toInt)).toOption
         )
-    } yield Aircraft(id, classType, target, emergency)
+    } yield Aircraft(id, classType, target, emergency, time)
 
-// Runnway
+// Runway
 def xmlToRunway(runway: Node): Result[Runway] =
     for {
         id <- fromAttribute(runway, "id").flatMap(id => Identifier(id))
-        handles <- traverse(runway.child.filter(_.label == "handles"), xmlToHandles)
-    } yield Runway(id, handles)
+        classes <- traverse(runway.child.filter(_.label == "handles"), xmlToClass)
+    } yield Runway(id, classes, List())
 
-// Handles
-def xmlToHandles(handles: Node): Result[Handles] =
+def xmlToClass(handle: Node): Result[ClassType] = {
     for {
-        classType <- fromAttribute(handles, "class").flatMap(c => ClassType(c.toByte))
-    } yield Handles(classType)
-
+        classType <- fromAttribute(handle, "class").flatMap(c => ClassType(c.toByte))
+    } yield classType
+}
