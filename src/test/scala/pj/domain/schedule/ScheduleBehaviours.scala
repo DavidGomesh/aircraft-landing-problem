@@ -1,8 +1,12 @@
-package pj.assessment
+package pj.domain.schedule
+
+// package pj.assessment
 
 import scala.language.adhocExtensions
 
 import java.io.File
+
+import org.scalatest.funsuite.AnyFunSuite
 
 import scala.xml.{Elem, Utility}
 import _root_.pj.domain.DomainError
@@ -11,17 +15,14 @@ import _root_.pj.io.FileIO.loadError
 import _root_.pj.io.FileIO.load
 import _root_.pj.domain.{DomainError, Result }
 import _root_.pj.io.FileIO.save
-import org.scalatest.funsuite.AnyFunSuite
-// TODO: Create the code to test a functional domain model for schedule creation.
-//       create files in the files/test/ms01 folder
 
-class ScheduleMS01Test extends AnyFunSuite:
 
+trait ScheduleBehavioursTest extends AnyFunSuite:
   val IN = "_in.xml"              // Input file termination
   val OUT = "_out.xml"            // Output file termination
   val OUTERROR = "_outError.xml"  // Error file termination
   val OUTDIFF = "_outDiff.xml"    // Generated file termination (only written when xml files do not match)
-  val PATH = "files/assessment/ms01"                // Assessment file path
+  def PATH: String                // Assessment file path
   val OK = "OK"
   val FAILURE_ERRORFILE = "XML ERROR FILE EXPECTED AND NOT FOUND!"
   val NOMATCH = "XML FILES DID NOT MATCH!"
@@ -64,9 +65,3 @@ class ScheduleMS01Test extends AnyFunSuite:
       println(message)
       assert( passedTests == numTests )
     }
-
-  // Assessment file path
-  performTests(pj.assessment.AssessmentMS01.create, "Milestone 1")
-
-
-  
