@@ -4,4 +4,4 @@ import pj.domain.Result
 import scala.xml.Elem
 
 trait Schedule:
-  def create(xml: Elem): Result[Elem]
+  def create(xml: String): Result[Elem]

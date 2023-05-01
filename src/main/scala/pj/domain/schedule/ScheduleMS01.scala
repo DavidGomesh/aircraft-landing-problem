@@ -7,12 +7,42 @@ import pj.domain.model.Aircraft
 import pj.domain.model.Runway
 import pj.domain.simpleTypes.*
 
+import scala.xml.*
+import pj.domain.simpleTypes.*
+import pj.domain.schedule.ScheduleMS01
+import pj.domain.model.Agenda
+import pj.io.AgendaIO
+
 object ScheduleMS01 extends Schedule:
 
     // TODO: Create the code to implement a functional domain model for schedule creation
     //       Use the xml.XML code to handle the xml elements
     //       Refer to https://github.com/scala/scala-xml/wiki/XML-Processing for xml creation
-    def create(xml: Elem): Result[Elem] = ???
+    def create(xml: String): Result[Elem] =
+
+        // val filePath = "files/assessment/ms01/valid00_in.xml"
+        final case class Response(id: String, runway: String, time: String)
+
+        AgendaIO.xmlToAgenda(xml) match
+            case Right(agenda) => {
+                val response = ScheduleMS01.schedule(agenda.aircrafts, agenda.runways)
+                response match
+                    case Right(runways) => {
+                        val resp = runways.flatMap(runway => runway.aircrafts.map(aircraft => {
+                            Response(aircraft.id.to, runway.id.to, aircraft.time.toString)
+                        })).sortBy(_.time.toInt)
+
+                        Right(
+                            <schedule xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../schedule.xsd " xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dei.isep.ipp.pt/tap-2023">
+                                {resp.map(item => <aircraft id={item.id} runway={item.runway} time={item.time}/>)}
+                            </schedule>
+                        )
+                        
+                    }
+                    case Left(error) => Left(error)
+            }
+            case Left(error) => Left(error)
+
 
     // Schedule Aircrafts in Runways
     def schedule(unscheduled: List[Aircraft], runways: List[Runway]): Result[List[Runway]] =
