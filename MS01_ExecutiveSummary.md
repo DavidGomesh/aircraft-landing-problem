@@ -31,11 +31,49 @@ To develop the algorithm that solves the problem addressed, the following steps 
 
 The Agenda class was created as follows:
 
-- A list of aircraft ("aircrafts") of type "Aircraft"
-- A list of runways of type "Runway"
-- A maximum allowed delay time ("maximumDelayTime") of type "PositiveInteger"
+- A list of aircraft (`aircrafts`) of type `Aircraft`
+- A list of runways of type `Runway`
+- A maximum allowed delay time (`maximumDelayTime`) of type `PositiveInteger`
 
-???
+The Aircraft classs was created as follows:
+
+- id: an object of type `Identifier`, which represents the unique identifier of the aircraft.
+- classType: an object of type `ClassType`, which represents the type of aircraft.
+- target: an object of type `NonNegativeInteger`.
+- emergency: an optional object of type `PositiveInteger`.
+
+The Handles class was created as follows:
+
+- classType: an object of type `ClassType`, which represents the type of aircraft that the handles correspond to.
+
+The Runway class was created as follows:
+
+- id: an object of type `Identifier``, which represents the unique identifier of the runway.
+- classes: a list of objects of type `Handles`, which represents the different types of aircraft that can use the runway.
+
+## SimpleTypes
+
+The ClassType was created as follows:
+
+- apply: a method that takes a byte as input and returns a `Result` object containing a `ClassType` object if the input is valid,
+  or an `IllegalArgumentError` object if the input is invalid.
+- to: a method that returns the byte value of the `ClassType`.
+- getGapOperation: a method that takes another `ClassType` object as input and returns an integer representing the gap operation time between the two class types.
+
+The Identifier was created as follows: 
+
+- apply: a method that takes a string as input and returns a `Result` object containing an `Identifier` object with the same string value.
+
+The NonNegativeInteger was created as follows:
+
+- apply: a method that takes an integer as input and returns a `Result` object containing a `NonNegativeInteger` object if the input is a non-negative integer,
+  or an `IllegalArgumentError` object if the input is negative.
+
+
+The PositiveInteger was created as follows:
+
+- apply: a method that takes an integer as input and returns a `Result` object containing a `PositiveInteger` object if the input is a positive integer,
+  or an `IllegalArgumentError` object if the input is non-positive.
 
 ## Tests
 
