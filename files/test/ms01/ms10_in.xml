@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda maximumDelayTime="900" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dei.isep.ipp.pt/tap-2023" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../agenda.xsd">
+    <aircrafts>
+        <aircraft id="A4" class="1" target="5" emergency="5"/>
+        <aircraft id="A1" class="5" target="7"/>
+        <aircraft id="A2" class="2" target="11"/>
+        <aircraft id="A3" class="3" target="65"/>
+        <aircraft id="A5" class="2" target="100" emergency="5"/>
+        <aircraft id="A6" class="6" target="113"/>
+        <aircraft id="A7" class="1" target="120"/>
+        <aircraft id="A11" class="8" target="131" emergency="10"/>
+        <aircraft id="A8" class="7" target="230"/>
+        <aircraft id="A9" class="3" target="231"/>
+        <aircraft id="A10" class="8" target="245"/>
+        <aircraft id="A12" class="9" target="251" emergency="10"/>
+        <aircraft id="A13" class="6" target="267"/>
+        <aircraft id="A14" class="10" target="270"/>
+    </aircrafts>
+    <runways>
+        <runway id="R1">
+            <handles class="1"/>
+            <handles class="2"/>
+            <handles class="3"/>
+            <handles class="4"/>
+            <handles class="5"/>
+            <handles class="7"/>
+            <handles class="8"/>
+            <handles class="9"/>
+            <handles class="10"/>
+        </runway>
+        </runway>
+        <runway id="R2">
+            <handles class="1"/>
+            <handles class="2"/>         
+            <handles class="4"/>
+            <handles class="5"/>
+            <handles class="6"/>         
+            <handles class="7"/>
+            <handles class="8"/>
+            <handles class="9"/>
+            <handles class="10"/>
+        </runway>
+        <runway id="R3">
+            <handles class="1"/>
+            <handles class="2"/>         
+            <handles class="3"/>
+            <handles class="5"/>
+            <handles class="6"/>
+        </runway>
+    </runways>
+</agenda>
