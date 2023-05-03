@@ -24,13 +24,3 @@ object Runway:
         runways.foldLeft(false)((isCompatible, runway) => {
             isCompatible || runway.isCompatible(aircraft)
         })
-    
-    def getCompatible(aircraft: Aircraft, runways: List[Runway]): List[Runway] = 
-        runways.filter(_.isCompatible(aircraft))
-    
-    def calculateDelay(aircraft: Aircraft, runways: List[Runway]): List[(Int, Runway)] = 
-        runways.map(runway => (aircraft.delay(runway), runway))
-    
-    def updateRunways(updated: Runway, runways: List[Runway]): List[Runway] =
-        val index = runways.indexWhere(_.id == updated.id)
-        runways.updated(index, updated)
