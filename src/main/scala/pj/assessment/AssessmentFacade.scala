@@ -5,7 +5,7 @@ import pj.domain.Result
 import pj.domain.schedule.{Schedule, ScheduleMS01, ScheduleMS03}
 
 object AssessmentMS01 extends Schedule:
-  def create(xml: String): Result[Elem] = ScheduleMS01.create(xml)
+  def create(xml: Elem): Result[Elem] = ScheduleMS01.create(xml)
 
 object AssessmentMS03 extends Schedule:
-  def create(xml: String): Result[Elem] = ScheduleMS03.create(xml)
+  def create(xml: Elem): Result[Elem] = ScheduleMS03.create(xml)

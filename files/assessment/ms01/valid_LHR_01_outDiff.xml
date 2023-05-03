@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<schedule 
+cost="10182" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../schedule.xsd " xmlns="http://www.dei.isep.ipp.pt/tap-2023" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <aircraft id="Aircraft1" runway="Northern Runway" time="0"/>
+    <aircraft id="Aircraft2" runway="Southern Runway" time="8"/>
+    <aircraft id="Aircraft4" runway="Northern Runway" time="67"/>
+    <aircraft id="Aircraft5" runway="Northern Runway" time="155"/>
+    <aircraft id="Aircraft6" runway="Southern Runway" time="179"/>
+    <aircraft id="Aircraft7" runway="Northern Runway" time="221"/>
+    <aircraft id="Aircraft3" runway="Northern Runway" time="296"/>
+    <aircraft id="Aircraft9" runway="Southern Runway" time="319"/>
+    <aircraft id="Aircraft8" runway="Northern Runway" time="356"/>
+    <aircraft id="Aircraft12" runway="Southern Runway" time="450"/>
+    <aircraft id="Aircraft10" runway="Northern Runway" time="476"/>
+    <aircraft id="Aircraft14" runway="Southern Runway" time="531"/>
+    <aircraft id="Aircraft11" runway="Northern Runway" time="536"/>
+    <aircraft id="Aircraft13" runway="Northern Runway" time="626"/>
+    <aircraft id="Aircraft21" runway="Southern Runway" time="686"/>
+    <aircraft id="Aircraft15" runway="Northern Runway" time="746"/>
+    <aircraft id="Aircraft16" runway="Northern Runway" time="806"/>
+    <aircraft id="Aircraft23" runway="Southern Runway" time="843"/>
+    <aircraft id="Aircraft17" runway="Northern Runway" time="866"/>
+    <aircraft id="Aircraft24" runway="Southern Runway" time="912"/>
+    <aircraft id="Aircraft18" runway="Northern Runway" time="926"/>
+    <aircraft id="Aircraft19" runway="Northern Runway" time="986"/>
+    <aircraft id="Aircraft25" runway="Southern Runway" time="1043"/>
+    <aircraft id="Aircraft26" runway="Southern Runway" time="1103"/>
+    <aircraft id="Aircraft20" runway="Northern Runway" time="1106"/>
+    <aircraft id="Aircraft22" runway="Northern Runway" time="1166"/>
+    <aircraft id="Aircraft30" runway="Southern Runway" time="1199"/>
+    <aircraft id="Aircraft27" runway="Northern Runway" time="1286"/>
+    <aircraft id="Aircraft31" runway="Southern Runway" time="1295"/>
+    <aircraft id="Aircraft28" runway="Northern Runway" time="1346"/>
+    <aircraft id="Aircraft29" runway="Northern Runway" time="1406"/>
+    <aircraft id="Aircraft33" runway="Southern Runway" time="1452"/>
+    <aircraft id="Aircraft32" runway="Northern Runway" time="1466"/>
+    <aircraft id="Aircraft34" runway="Southern Runway" time="1521"/>
+    <aircraft id="Aircraft35" runway="Northern Runway" time="1541"/>
+    <aircraft id="Aircraft36" runway="Southern Runway" time="1581"/>
+    <aircraft id="Aircraft37" runway="Northern Runway" time="1631"/>
+    <aircraft id="Aircraft38" runway="Southern Runway" time="1677"/>
+    <aircraft id="Aircraft39" runway="Northern Runway" time="1751"/>
+    <aircraft id="Aircraft42" runway="Southern Runway" time="1773"/>
+    <aircraft id="Aircraft40" runway="Northern Runway" time="1811"/>
+    <aircraft id="Aircraft41" runway="Northern Runway" time="1886"/>
+    <aircraft id="Aircraft43" runway="Southern Runway" time="1930"/>
+    <aircraft id="Aircraft44" runway="Northern Runway" time="2006"/>
+    <aircraft id="Aircraft45" runway="Southern Runway" time="2061"/>
+    <aircraft id="Aircraft46" runway="Northern Runway" time="2066"/>
+</schedule>
+
