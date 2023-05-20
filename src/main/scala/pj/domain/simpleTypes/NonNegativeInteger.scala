@@ -10,6 +10,7 @@ object NonNegativeInteger:
     def apply(number: Int): Result[NonNegativeInteger] =
         if (number >= 0) Right(number)
         else Left(IllegalArgumentError("Invalid non negative integer"))
+    def zero: NonNegativeInteger = 0
 
 extension (number: NonNegativeInteger)
     @targetName("NonNegativeInteger.toInt")

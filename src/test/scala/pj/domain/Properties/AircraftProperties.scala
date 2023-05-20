@@ -30,8 +30,7 @@ object AircraftProperties extends Properties("AircraftProperties"):
         classType <-  Gen.oneOf(runways.flatMap(_.classes))
         target <- genAircraftTarget
         emergency <- Gen.frequency(4 -> None, 1 -> genAircraftEmergency)
-        time <- genAircraftTimeNew
-      yield Aircraft(id, classType, target, None, time)
+      yield Aircraft(id, classType, target, None, NonNegativeInteger.zero)
 
     property("Generated Aircraft") = forAll(genRunways) { runways =>
       forAll(genAircraft(runways)) { aircraft =>
