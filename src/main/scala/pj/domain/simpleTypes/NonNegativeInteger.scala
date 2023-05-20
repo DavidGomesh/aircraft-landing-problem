@@ -12,8 +12,8 @@ object NonNegativeInteger:
         else Left(IllegalArgumentError("Invalid non negative integer"))
 
 extension (number: NonNegativeInteger)
-    @targetName("NonNegativeInteger.to")
-    def to: Int = number
+    @targetName("NonNegativeInteger.toInt")
+    def toInt: Int = number
     @targetName("NonNegativeInteger.sum")
     def +(other: NonNegativeInteger): NonNegativeInteger = number + other
     @targetName("NonNegativeInteger.sub")
