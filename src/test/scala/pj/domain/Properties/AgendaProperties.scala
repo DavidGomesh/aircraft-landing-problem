@@ -15,8 +15,8 @@ object AgendaProperties extends Properties("AgendaProperties"):
     def genAgenda =
         for
             runway <- genRunways
-            num <- Gen.choose(1,10)
-            aircraft <- Gen.listOfN(1, genAircraft(runway))
+            num <- Gen.choose(20, 1000)
+            aircraft <- Gen.listOfN(num, genAircraft(runway))
         yield (runway, aircraft)
 
         

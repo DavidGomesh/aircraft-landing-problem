@@ -12,10 +12,9 @@ object GenAgenda extends Properties("GenAgenda"):
     // def genMaximumDelayTime: Gen[PositiveInteger] = Gen.choose(0, Int.MaxValue).flatMap(num =>
     //   PositiveInteger.apply(num).fold(_ => Gen.fail, Gen.const))
 
-
     def genRunways: Gen[List[Runway]] = 
-        for{
-            lrunways <- Gen.listOfN(5, genRunway)
-        } yield lrunways
+        for
+            runways <- Gen.listOfN(2, genRunway)
+        yield runways
 
 
