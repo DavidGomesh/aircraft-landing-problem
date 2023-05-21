@@ -1,18 +1,12 @@
-# Development methodology
+# Property-based test development methodology
+--- 
+Properties are general principles that describe the expected behavior of a program. Unlike conventional test suites, properties operate at a more abstract level and generically describe the desired result of an operation. They allow automatically validating whether a program fulfills these properties in a variety of scenarios, generating test cases based on them. This helps identify unwanted behavior or errors that may occur in different situations, providing more comprehensive coverage. Properties are widely used in property-based testing to improve program reliability and robustness.
 
-The project includes the definition of numerous properties and generators for evaluating a scheduling approach for aircraft takeoff and landing on runways.
+This project includes defining numerous properties and generators to evaluate a scheduling approach for landing and taking off aircraft on runways.
 
-- Imports necessary classes and generators. Defines generators for Runway and Agenda objects. Provides a property-based test to check if the resulting Agenda object has non-empty lists of Aircraft and Runway objects.
-
-- Defines generators for random Aircraft instances. Implements a property-based test to check if the ClassType of created Aircraft instances matches one of the ClassType values defined in Runway instances.
-
-- Defines a generator for random Runway objects. Implements a property-based test to check if the created Runway object has a non-empty list of runway classes.
-
-- Defines attributes used to validate a scheduling method. Specifies various properties to test the scheduling method. Uses helper functions from other files to generate random instances of runways, planes, and agendas.
-
-- AttributeGenerator defines generators for various attributes used in the properties. For example, genIdentifier generates an Identifier type, genClassType generates a ClassType type, genAircraftTarget and genAircraftTime generate NonNegativeInteger types, and genAircraftEmergency generates an optional PositiveInteger type. genClassRunway generates a list of ClassType types by using the genClassType function.
-
-These properties and generators are used together with a property testing library such as ScalaCheck to produce and validate inputs for the specified properties.
+The project defines generators for random aircraft instances, as well as implements property-based tests for all generations.
+Within the project, the 'AttributeGenerator' file is created, in which generators for various attributes used in the properties are defined.
+These properties and generators are used in conjunction with a property testing library such as ScalaCheck to produce and validate inputs for the specified properties.
 
 ## Properties
 
@@ -31,7 +25,7 @@ It imports necessary `Runway` and `Aircraft` classes and generators from other p
 - The forAll function is used to perform the test, which generates random `Runway` and `Aircraft` objects and validates the property for each combination. The produced `Aircraft` instance for each test case is included in the test output.
 
 ### RunwaysProperties
-- The `genRunway` function generates a random `Runway` object with a four-character identification and a set of runway classes.
+- We have a `genRunway` function that generates a random `Runway` object.
 
 - The property function implements a property-based test that determines whether the created `Runway` object has a list of runway classes that is not empty. 
 
