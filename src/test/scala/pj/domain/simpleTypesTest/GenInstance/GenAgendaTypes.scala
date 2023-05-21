@@ -14,7 +14,8 @@ object GenAgenda extends Properties("GenAgenda"):
 
     def genRunways: Gen[List[Runway]] = 
         for
-            runways <- Gen.listOfN(2, genRunway)
+            num <- Gen.choose(50, 500)
+            runways <- Gen.listOfN(num, genRunway)
         yield runways
 
 
