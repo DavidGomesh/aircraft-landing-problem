@@ -21,3 +21,5 @@ extension (number: NonNegativeInteger)
     def -(other: NonNegativeInteger): NonNegativeInteger = number - other
     @targetName("NonNegativeInteger.greaterThan")
     def >(other: NonNegativeInteger): Boolean = number > other
+    @targetName("NonNegativeInteger.lessOrEqualss")
+    def lessOrEquals(other: NonNegativeInteger): Boolean = number <= other

@@ -17,3 +17,5 @@ extension (number: PositiveInteger)
     def to: Int = number
     @targetName("PositiveInteger.lessOrEquals")
     def <=(other: PositiveInteger): Boolean = number <= other
+    @targetName("PositiveInteger.greaterThan")
+    def greaterThan(other: PositiveInteger): Boolean = number > other

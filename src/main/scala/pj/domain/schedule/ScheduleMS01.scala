@@ -5,7 +5,6 @@ import pj.domain.*
 import pj.domain.DomainError.*
 import pj.domain.model.Aircraft
 import pj.domain.model.Runway
-import pj.domain.simpleTypes.*
 
 import scala.xml.*
 import pj.domain.simpleTypes.*
@@ -29,7 +28,7 @@ object ScheduleMS01 extends Schedule:
                 response match
                     case Right(runways) => {
                         val resp = runways._2.flatMap(runway => runway.aircrafts.map(aircraft => {
-                            Response(aircraft.id.to, runway.id.to, aircraft.time.toString)
+                            Response(aircraft.id.toString, runway.id.toString, aircraft.time.toString)
                         })).sortBy(_.time.toInt)
 
                         Right(
@@ -122,7 +121,7 @@ object ScheduleMS01 extends Schedule:
     def calculateCost(aircraft: Aircraft, runway: Runway, runways: List[(Int, Runway)]): Int =
         val index = runways.indexWhere(r => r._2.id == runway.id)
         val delay = runways(index)._1
-        if 1 to 3 contains aircraft.classType then delay * 2 else delay
+        if List(1,2,3) contains aircraft.classType then delay * 2 else delay
         
     // Check if an aircraft in emergency can be scheduled
     def checkEmergency(emergency: Aircraft, runways: List[Runway]): Boolean =
