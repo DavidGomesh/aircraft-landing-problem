@@ -11,9 +11,9 @@ import pj.domain.Properties.AircraftProperties
 import pj.domain.Properties.RunwaysProperties
 
 
-// AircraftProperties.check()
-// RunwaysProperties.check()
-// ScheduleProperties
+val num: Option[Int] = Some(10)
+val n1 = num.fold(0)(n => n)
 
-Gen.frequency((5, genAircraftEmergency)).sample
-Gen.frequency(4 -> None, 1 -> genAircraftEmergency).sample
+val n = 1 + n1
+
+

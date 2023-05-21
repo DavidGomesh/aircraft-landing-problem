@@ -43,42 +43,47 @@ object ScheduleMS01 extends Schedule:
             }
             case Left(error) => Left(error)
 
-
     // Schedule Aircrafts in Runways
     def schedule(unscheduled: List[Aircraft], runways: List[Runway], cost: Int): Result[(Int, List[Runway])] =
-        unscheduled match
-            case aircraft :: tail => {
-                
-                if(Runway.isCompatible(aircraft, runways))
 
-                    val compatibleRunways = runways.filter(r => r.isCompatible(aircraft))
-                    val runwaysWithDelays = compatibleRunways.map(runway => (delay(aircraft, runway), runway)).sortBy(_._1)
-                    val emergencies = unscheduled.filter(a => a != aircraft && a.emergency.isDefined)
+        def loop(unscheduled: List[Aircraft], runways: List[Runway], cost: Int, switched: List[Aircraft]): Result[(Int, List[Runway])] =
+            unscheduled match
+                case aircraft :: tail => {
+                    
+                    if(Runway.isCompatible(aircraft, runways))
 
-                    if(emergencies.isEmpty)
-                        scheduleWithoutEmergency(aircraft, runwaysWithDelays) match
-                            case Right(updatedRunway) => {
-                                val newCost = calculateCost(aircraft, updatedRunway, runwaysWithDelays)
-                                val updatedRunways = updateRunways(updatedRunway, runways)
-                                schedule(tail, updatedRunways, cost + newCost)
-                            }
-                            case Left(error: DomainError) => Left(error)
+                        val compatibleRunways = runways.filter(r => r.isCompatible(aircraft))
+                        val runwaysWithDelays = compatibleRunways.map(runway => (delay(aircraft, runway), runway)).sortBy(_._1)
+                        val emergencies = unscheduled.filter(a => a != aircraft && a.emergency.isDefined)
+
+                        if(emergencies.isEmpty)
+                            scheduleWithoutEmergency(aircraft, runwaysWithDelays) match
+                                case Right(updatedRunway) => {
+                                    val newCost = calculateCost(aircraft, updatedRunway, runwaysWithDelays)
+                                    val updatedRunways = updateRunways(updatedRunway, runways)
+                                    loop(tail, updatedRunways, cost + newCost, switched)
+                                }
+                                case Left(error: DomainError) => Left(error)
+                        else
+                            val emergency = emergencies(0)
+                            scheduleWithEmergency(aircraft, emergency, runwaysWithDelays) match
+                                case Right(updatedRunway) => {
+                                    val newCost = calculateCost(aircraft, updatedRunway, runwaysWithDelays)
+                                    val updatedRunways = updateRunways(updatedRunway, runways)
+                                    loop(tail, updatedRunways, cost + newCost, switched)
+                                }
+                                case Left(error: DomainError) => {
+                                    if(switched.contains(emergency)) then
+                                        Left(AnError("Invalid agenda"))
+                                    else
+                                        val updatedUnscheduled = advanceAircraft(emergency, unscheduled)
+                                        loop(updatedUnscheduled, runways, cost, switched.appended(emergency))
+                                }
                     else
-                        val emergency = emergencies(0)
-                        scheduleWithEmergency(aircraft, emergency, runwaysWithDelays) match
-                            case Right(updatedRunway) => {
-                                val newCost = calculateCost(aircraft, updatedRunway, runwaysWithDelays)
-                                val updatedRunways = updateRunways(updatedRunway, runways)
-                                schedule(tail, updatedRunways, cost + newCost)
-                            }
-                            case Left(error: DomainError) => {
-                                val updatedUnscheduled = advanceAircraft(emergency, unscheduled)
-                                schedule(updatedUnscheduled, runways, cost)
-                            }
-                else
-                    Left(AnError("No compatible runways"))
-            }
-            case Nil => Right((cost, runways))
+                        Left(AnError("No compatible runways"))
+                }
+                case Nil => Right((cost, runways))
+        loop(unscheduled , runways, cost, List())
 
     // Schedule an aircraft without emergencies
     def scheduleWithoutEmergency(aircraft: Aircraft, runways: List[(Int, Runway)]): Result[Runway] =
@@ -90,7 +95,7 @@ object ScheduleMS01 extends Schedule:
                     case Left(error: DomainError) => Left(error)
             }
             case _ => Left(AnError("No runways available"))
-
+    
     // Schedule an aircraft with emergencies
     def scheduleWithEmergency(aircraft: Aircraft, emergency: Aircraft, runways: List[(Int, Runway)]): Result[Runway] =
         runways match
