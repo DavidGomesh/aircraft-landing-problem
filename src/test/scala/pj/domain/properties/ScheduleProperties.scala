@@ -3,21 +3,38 @@ package pj.domain.properties
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
+import org.scalatest.run
+
+import pj.domain.Result
+
 import pj.domain.model.Aircraft
-import pj.domain.simpleTypes.PositiveInteger
 import pj.domain.model.Runway
+
+import pj.domain.simpleTypes.*
+import pj.domain.simpleTypes.PositiveInteger
+
 import pj.domain.schedule.ScheduleMS01.schedule
+
+import pj.domain.properties.AircraftProperties.*
 import pj.domain.properties.RunwaysProperties.genRunway
 import pj.domain.properties.AircraftProperties.genAircraft
 import pj.domain.properties.AgendaProperties.genAgenda
-import pj.domain.simpleTypes.*
-import org.scalatest.run
-import pj.domain.Result
+import pj.domain.properties.RunwaysProperties.genRunways
 
 object ScheduleProperties extends Properties("ScheduleProperties"):
 
+    def verifyRunnway(lr: List[Runway]): Boolean =
+        lr.forall(r => verifyAircrafts(r.aircrafts))
+
+    def verifyAircrafts(la: List[Aircraft]): Boolean = 
+        la.forall(a => isDiffTime(a, la))
+
+    def isDiffTime(a: Aircraft, la: List[Aircraft]): Boolean =
+        la.forall(a2 => a == a2 || a.time != a2.time)
+
     property("In a valid schedule, every aircraft was assigned a runway") = forAll(genAgenda) {
         (runways, aircrafts) => {
+            println(aircrafts)
             val scheduled = schedule(aircrafts, runways, 0)
             scheduled.fold(_ => false, (_, runway) => {
                 aircrafts.forall(a => runway.flatMap(_.aircrafts.map(_.id)).contains(a.id))
@@ -25,7 +42,7 @@ object ScheduleProperties extends Properties("ScheduleProperties"):
         }
     }
 
-     property("Each aircraft should be scheduled for a runway which can handle it") = forAll(genAgenda) { 
+    property("Each aircraft should be scheduled for a runway which can handle it") = forAll(genAgenda) { 
         (runways, aircrafts) =>{
             val scheduled = schedule(aircrafts, runways, 0)
             scheduled.fold(_ => false, (_, runway) => {
@@ -70,16 +87,6 @@ object ScheduleProperties extends Properties("ScheduleProperties"):
     }
     
     property("Two or more aircraft on a runway should never be assigned simultaneous times.") = forAll(genAgenda) {
-        
-        def verifyRunnway(lr: List[Runway]): Boolean =
-            lr.forall(r => verifyAircrafts(r.aircrafts))
-
-        def verifyAircrafts(la: List[Aircraft]): Boolean = 
-            la.forall(a => isDiffTime(a, la))
-
-        def isDiffTime(a: Aircraft, la: List[Aircraft]): Boolean =
-            la.forall(a2 => a == a2 || a.time != a2.time)
-
         (runways, aircrafts) => {
             val scheduled = schedule(aircrafts, runways, 0)
             scheduled.fold(_ => false, (_, runways) => verifyRunnway(runways))

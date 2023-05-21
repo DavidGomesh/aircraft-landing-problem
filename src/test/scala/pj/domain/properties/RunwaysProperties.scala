@@ -9,6 +9,12 @@ import pj.domain.simpleTypesTest.generators.AttributeGenerator.*
 
 object RunwaysProperties extends Properties("RunwaysProperties"):
 
+    def genRunways: Gen[List[Runway]] = 
+        for
+            num <- Gen.choose(50, 500)
+            runways <- Gen.listOfN(num, genRunway)
+        yield runways
+
     def genRunway: Gen[Runway] =
         for{
             id <- genIdentifier(4)
