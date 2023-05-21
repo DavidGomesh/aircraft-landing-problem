@@ -12,10 +12,11 @@ import pj.domain.properties.AircraftProperties.genAircraft
 import pj.domain.properties.AgendaProperties.genAgenda
 import pj.domain.simpleTypes.*
 import org.scalatest.run
+import pj.domain.Result
 
 object ScheduleProperties extends Properties("ScheduleProperties"):
 
-    property("In a valid schedule, every aircraft was assigned a runway;") = forAll(genAgenda) {
+    property("In a valid schedule, every aircraft was assigned a runway") = forAll(genAgenda) {
         (runways, aircrafts) => {
             val scheduled = schedule(aircrafts, runways, 0)
             scheduled.fold(_ => false, (_, runway) => {
@@ -67,15 +68,20 @@ object ScheduleProperties extends Properties("ScheduleProperties"):
             })                            
         }
     }
-
-
     
+    property("Two or more aircraft on a runway should never be assigned simultaneous times.") = forAll(genAgenda) {
+        
+        def verifyRunnway(lr: List[Runway]): Boolean =
+            lr.forall(r => verifyAircrafts(r.aircrafts))
 
-    // a aeronave de emergencia deve ser adicionada na runways sem execeder seu tempo de emergencia
-    
-    
-    // verificar se todas as aeronaves que não são de emergência, estão sendo inseridas nas runways na sequencia
-    //primeiro a chegar, primeiro a ser servido -> como verificar ==> pegar a lista de aircrafts nas runways,
-    // tirar as de emergencia e ordenar, depois verificar as duas listas (uma odernado por target e outra por time)
-    // estão nas mesma posição da lista, ou seja, ordenadas igualmentes
+        def verifyAircrafts(la: List[Aircraft]): Boolean = 
+            la.forall(a => isDiffTime(a, la))
 
+        def isDiffTime(a: Aircraft, la: List[Aircraft]): Boolean =
+            la.forall(a2 => a == a2 || a.time != a2.time)
+
+        (runways, aircrafts) => {
+            val scheduled = schedule(aircrafts, runways, 0)
+            scheduled.fold(_ => false, (_, runways) => verifyRunnway(runways))
+        }
+    }
