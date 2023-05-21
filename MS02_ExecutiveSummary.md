@@ -11,11 +11,9 @@ These properties and generators are used in conjunction with a property testing 
 ## Properties
 
 ### AgendaProperties
-It imports necessary `Runway` and `Aircraft` classes and generators from other property suites.
+- This code creates a Scala object called `AgendaProperties` with the property `GeneratedAgenda`. The ScalaCheck library is used by the property to produce random test data for the `genAgenda` function. 
 
-- The `AgendaProperties` object defines a `Runway` object generator and an `Agenda` object generator.The `genAgenda` generator generates an `Agenda` object from a list of `Aircraft` objects ordered by goal integer value.
-
-- The property method specifies a property-based test that determines whether the resulting `Agenda` object has non-empty lists of `Aircraft` and `Runway` objects. The forAll function does the test using a large number of randomly generated inputs.
+- The `genAgenda` function generates a list of runways, as well as a list of aircraft, which are sorted by target time. The property ensures that neither runways nor aircraft lists are empty.
 
 ### AircraftProperties
 - The `genAircraft` method generates random `Aircraft` instances by using generators for its characteristics such as Identifier, ClassType, NonNegativeInteger, and Option[AircraftEmergency].
@@ -23,6 +21,8 @@ It imports necessary `Runway` and `Aircraft` classes and generators from other p
 - The property function defines a property-based test that determines whether the ClassType of the created `Aircraft` instances matches one of the ClassType values defined in the `Runway` instances.
 
 - The forAll function is used to perform the test, which generates random `Runway` and `Aircraft` objects and validates the property for each combination. The produced `Aircraft` instance for each test case is included in the test output.
+
+- The `genAircrafts` generates a list of aircrafts, generating a list of unique identifiers, and then generating a sequence of aircrafts using each identifier and a list of runways.
 
 ### RunwaysProperties
 - We have a `genRunway` function that generates a random `Runway` object.
