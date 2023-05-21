@@ -1,4 +1,4 @@
-package pj.domain.Properties
+package pj.domain.properties
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
@@ -7,11 +7,9 @@ import pj.domain.model.Aircraft
 import pj.domain.simpleTypes.PositiveInteger
 import pj.domain.model.Runway
 import pj.domain.schedule.ScheduleMS01.schedule
-import pj.domain.Properties.RunwaysProperties.genRunway
-import pj.domain.Properties.AircraftProperties.genAircraft
-import pj.domain.simpleTypesTest.GenInstance.GenAgenda.genRunways
-import pj.domain.simpleTypesTest.GenInstance.GenAircraftTypes.genIdentifier
-import pj.domain.Properties.AgendaProperties.genAgenda
+import pj.domain.properties.RunwaysProperties.genRunway
+import pj.domain.properties.AircraftProperties.genAircraft
+import pj.domain.properties.AgendaProperties.genAgenda
 import pj.domain.simpleTypes.*
 import org.scalatest.run
 

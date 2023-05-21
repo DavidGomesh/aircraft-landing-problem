@@ -1,4 +1,4 @@
-package pj.domain.Properties
+package pj.domain.properties
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
@@ -8,10 +8,16 @@ import pj.domain.simpleTypes.*
 import pj.domain.model.Agenda
 import pj.domain.model.Runway
 import pj.domain.model.Aircraft
-import pj.domain.simpleTypesTest.GenInstance.GenAgenda.genRunways
-import pj.domain.Properties.AircraftProperties.genAircraft
+import pj.domain.properties.RunwaysProperties.genRunway
+import pj.domain.properties.AircraftProperties.genAircraft
 
 object AgendaProperties extends Properties("AgendaProperties"):
+
+    def genRunways: Gen[List[Runway]] = 
+        for
+            num <- Gen.choose(50, 500)
+            runways <- Gen.listOfN(num, genRunway)
+        yield runways
 
     def genAgenda =
         for
@@ -21,10 +27,7 @@ object AgendaProperties extends Properties("AgendaProperties"):
         yield (runway, aircrafts.sortBy(_.target.toInt))
 
         
-    // property("Generated Agenda") = forAll(genAgenda) { sc =>
-    //         sc.aircrafts.nonEmpty
-    //     }
-
-    // property("Generated Agenda with runways no Empty") = forAll(genAgenda) { sc =>
-    //         sc.runways.nonEmpty
-    //     }
+    property("Generated Agenda") = forAll(genAgenda) { (aircrafts, runways) =>
+            aircrafts.nonEmpty
+            runways.nonEmpty
+        }

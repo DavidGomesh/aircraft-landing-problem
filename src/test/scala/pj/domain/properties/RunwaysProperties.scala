@@ -1,18 +1,18 @@
-package pj.domain.Properties
+package pj.domain.properties
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
-import pj.domain.simpleTypesTest.GenInstance.GenAircraftTypes.genIdentifier
-import pj.domain.simpleTypesTest.GenInstance.GenRunwayTypes.genClass
 import pj.domain.model.Runway
+import pj.domain.simpleTypesTest.generators.AttributeGenerator.*
+
 
 object RunwaysProperties extends Properties("RunwaysProperties"):
 
     def genRunway: Gen[Runway] =
         for{
-            id <- genIdentifier
-            classes <- genClass
+            id <- genIdentifier(4)
+            classes <- genClassRunway
         } yield Runway(id, classes.distinct, List())
 
     property("Generated Runway") = forAll(genRunway) { runway =>
