@@ -4,7 +4,7 @@ import pj.domain.Result
 import pj.domain.DomainError.*
 import scala.annotation.targetName
 
-type NonNegativeInt = Integer
+type NonNegativeInt = Int
 
 object NonNegativeInt:
     def apply(n: Int): Result[NonNegativeInt] =
