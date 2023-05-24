@@ -1,6 +1,7 @@
 package domain
 
 import simpleTypes.identifier.RunwayId
+import simpleTypes.integer.NonNegativeInt
 import enumerate.ClassType
 
 final case class Runway(
@@ -17,5 +18,8 @@ final case class Runway(
 object Runway:
     def apply(id: RunwayId, classes: Seq[ClassType]): Runway =
         Runway(id, classes, Seq.empty)
+
+    def assign(a: Aircraft, r: Runway, t: NonNegativeInt): Runway = 
+        r.addAircraft(a.setTime(t))
 
 

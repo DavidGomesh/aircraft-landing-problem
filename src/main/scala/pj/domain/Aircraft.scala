@@ -14,8 +14,9 @@ final case class Aircraft(
     time: Option[NonNegativeInt]):
 
     def getTime: NonNegativeInt = time.getOrElse(0)
-    def setTime(t: NonNegativeInt): Aircraft =
-        copy(time = Some(t))
+    def setTime(t: NonNegativeInt): Aircraft = copy(time = Some(t))
+    
+    def inEmergency: Boolean = emergency.isDefined
 
 object Aircraft:
     def apply(id: AircraftId, ct: ClassType, t: NonNegativeInt, e: PositiveInt): Aircraft =
