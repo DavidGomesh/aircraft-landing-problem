@@ -14,7 +14,7 @@ enum ClassType:
 
 ## Separation
 
-The **Separation** contains three methods: **delay**, **minTime**, **separation**. And that functions providesa a way to calculate the minimum needed time to separate two aircrafts based on their classes categories and the present schedule aircraft arriving on a runway.
+The **Separation** contains three methods: **delay**, **minTime**, **separation**. And that functions provides a way to calculate the minimum needed time to separate two aircrafts based on their classes categories and the present schedule aircraft arriving on a runway.
 
 ```scala
 object Separation:
