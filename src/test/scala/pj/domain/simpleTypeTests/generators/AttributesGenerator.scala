@@ -25,13 +25,13 @@ object AttributesGenerator extends Properties("AttributesGenerator"):
         NonNegativeInt.apply(number).fold(_ => Gen.fail, Gen.const)
       )
 
-    def genAircraftTime: Gen[Option[NonNegativeInt]] = 
-      Gen.option(Gen.posNum[Int].flatMap { value =>
-        NonNegativeInt.apply(value) match {
-          case Right(positiveInt) => Gen.const(positiveInt)
-          case Left(_) => Gen.fail[NonNegativeInt]
-        }
-      })
+    // def genAircraftTime: Gen[Option[NonNegativeInt]] = 
+    //   Gen.option(Gen.posNum[Int].flatMap { value =>
+    //     NonNegativeInt.apply(value) match {
+    //       case Right(positiveInt) => Gen.const(positiveInt)
+    //       case Left(_) => Gen.fail[NonNegativeInt]
+    //     }
+    //   })
 
     def genAircraftEmergency: Gen[Option[PositiveInt]] = 
       Gen.option(Gen.posNum[Int].flatMap { value =>

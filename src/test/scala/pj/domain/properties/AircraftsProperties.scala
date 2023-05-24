@@ -24,5 +24,4 @@ object AircraftsProperties extends Properties("AircraftsProperties"):
         classType <-  Gen.oneOf(runways.flatMap(_.classes))
         target <- genAircraftTarget(0, 2000)
         emergency <- Gen.frequency(5 -> None, 1 -> genAircraftEmergency)
-        time <- genAircraftTime
-      yield Aircraft(id, classType, target, emergency, time)
+      yield Aircraft(id, classType, target, emergency, None)
