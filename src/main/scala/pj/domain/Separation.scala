@@ -3,8 +3,19 @@ package pj.domain
 import enumerate.ClassType
 import enumerate.ClassType.*
 import domain.Aircraft
+import domain.Runway
 
 object Separation:
+
+    def delay(a: Aircraft, r: Runway): Int = 
+        minTime(a, r) - a.target
+
+    def minTime(a: Aircraft, r: Runway): Int = 
+        r.aircrafts.foldLeft(0)((minTime, scheduled) => 
+            val time = scheduled.getTime + separation(scheduled, a)
+            if time >= minTime then time else minTime
+        )
+
     def separation(al: Aircraft, at: Aircraft): Int = 
         val cl = al.classType
         val ct = at.classType

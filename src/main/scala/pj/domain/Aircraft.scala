@@ -13,6 +13,7 @@ final case class Aircraft(
     emergency: Option[PositiveInt],
     time: Option[NonNegativeInt]):
 
+    def getTime: NonNegativeInt = time.getOrElse(0)
     def setTime(t: NonNegativeInt): Aircraft =
         copy(time = Some(t))
 
