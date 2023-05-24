@@ -6,16 +6,15 @@ import enumerate.ClassType
 final case class Runway(
     id: RunwayId,
     classes: Seq[ClassType],
-    aircrafts: Seq[Aircraft]
-)
+    aircrafts: Seq[Aircraft]):
+
+    def addAircraft(a: Aircraft): Runway =
+        copy(aircrafts = aircrafts.appended(a))
 
 object Runway:
     def apply(id: RunwayId, classes: Seq[ClassType]): Runway =
         Runway(id, classes, Seq.empty)
 
-extension (r: Runway)
-    def isCompatible(a: Aircraft): Boolean = 
+    def isCompatible(r: Runway, a: Aircraft): Boolean =
         r.classes.contains(a.classType)
 
-    def addAircraft(a: Aircraft): Runway =
-        r.copy(aircrafts = r.aircrafts.appended(a))

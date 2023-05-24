@@ -1,8 +1,7 @@
 package domain
 
-import enumerate.*
-import enumerate.ClassType.*
 import simpleTypes.identifier.AircraftId
+import enumerate.*
 import simpleTypes.integer.NonNegativeInt
 import simpleTypes.integer.PositiveInt
 import scala.annotation.targetName
@@ -12,8 +11,10 @@ final case class Aircraft(
     classType: ClassType,
     target: NonNegativeInt,
     emergency: Option[PositiveInt],
-    time: Option[NonNegativeInt]
-)
+    time: Option[NonNegativeInt]):
+
+    def setTime(t: NonNegativeInt): Aircraft =
+        copy(time = Some(t))
 
 object Aircraft:
     def apply(id: AircraftId, ct: ClassType, t: NonNegativeInt, e: PositiveInt): Aircraft =
@@ -21,13 +22,3 @@ object Aircraft:
 
     def apply(id: AircraftId, ct: ClassType, t: NonNegativeInt): Aircraft =
         Aircraft(id, ct, t, None, Option.empty)
-
-extension (a: Aircraft)
-    @targetName("Aircraft.separation")
-    def separation(t: Aircraft): Int = 
-        val cl = a.classType
-        val ct = t.classType
-        cl.separation(ct)
-    
-    def setTime(t: NonNegativeInt): Aircraft =
-        a.copy(time = Some(t))
