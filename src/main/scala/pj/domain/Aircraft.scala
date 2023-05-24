@@ -22,3 +22,11 @@ object Aircraft:
     def apply(id: AircraftId, ct: ClassType, t: NonNegativeInt): Aircraft =
         Aircraft(id, ct, t, None, Option.empty)
 
+extension (a: Aircraft)
+    def separation(t: Aircraft): Int = 
+        val cl = a.classType
+        val ct = t.classType
+        cl.separation(ct)
+    
+    def setTime(t: NonNegativeInt): Aircraft =
+        a.copy(time = Some(t))
