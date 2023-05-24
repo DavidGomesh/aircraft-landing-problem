@@ -7,6 +7,7 @@ enum ClassType:
     case Class1, Class2, Class3, Class4, Class5, Class6
 
 extension (c: ClassType)
+    @targetName("ClassType.separation")
     def separation(t: ClassType): Int = (c, t) match
         case (Class1, Class1) => 82
         case (Class1, Class2) => 69

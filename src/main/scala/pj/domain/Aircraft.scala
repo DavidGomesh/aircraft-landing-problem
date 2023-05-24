@@ -23,6 +23,7 @@ object Aircraft:
         Aircraft(id, ct, t, None, Option.empty)
 
 extension (a: Aircraft)
+    @targetName("Aircraft.separation")
     def separation(t: Aircraft): Int = 
         val cl = a.classType
         val ct = t.classType
