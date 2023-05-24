@@ -1,6 +1,6 @@
 package simpleTypes.identifier
 
-import error.Result
+import pj.domain.Result
 import scala.annotation.targetName
 
 type RunwayId = String

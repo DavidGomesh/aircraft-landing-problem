@@ -1,7 +1,7 @@
 package simpleTypes.integer
 
-import error.Result
-import error.DomainError.*
+import pj.domain.Result
+import pj.domain.DomainError.*
 import scala.annotation.targetName
 
 type NonNegativeInt = Integer
