@@ -8,7 +8,8 @@ import domain.Runway
 object Separation:
 
     def delay(a: Aircraft, r: Runway): Int = 
-        minTime(a, r) - a.target
+        val d = minTime(a, r) - a.target
+        if d < 0 then 0 else d
 
     def minTime(a: Aircraft, r: Runway): Int = 
         r.aircrafts.foldLeft(0)((minTime, scheduled) => 

@@ -15,6 +15,9 @@ final case class Runway(
     def isCompatible(a: Aircraft): Boolean =
         classes.contains(a.classType)
 
+    def assign(a: Aircraft, t: NonNegativeInt): Runway = 
+        addAircraft(a.setTime(t))
+
 object Runway:
     def apply(id: RunwayId, classes: Seq[ClassType]): Runway =
         Runway(id, classes, Seq.empty)
