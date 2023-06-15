@@ -10,29 +10,29 @@ final case class Agenda(
 )
 
 object Agenda:
-    
-    def from(la: Seq[Aircraft], lr: Seq[Runway]): Result[Agenda] =
-        for
-            a <- addAircrafts(la, Agenda(Seq.empty, Seq.empty))
-            a <- addRunways(lr, a)
-        yield a
 
-    def addAircrafts(la: Seq[Aircraft], ag: Agenda): Result[Agenda] =
-        la.foldLeft(Right(ag): Result[Agenda])((ag, ar) =>
-            ag.flatMap(addAircraft(ar, _))
-        )
+  def from(la: Seq[Aircraft], lr: Seq[Runway]): Result[Agenda] =
+    for
+      a <- addAircrafts(la, Agenda(Seq.empty, Seq.empty))
+      a <- addRunways(lr, a)
+    yield a
 
-    def addAircraft(ar: Aircraft, ag: Agenda): Result[Agenda] =
-        ag.aircrafts.exists(ar.id == _.id) match
-            case true => Left(RepeatedAircraftId(ar.id))
-            case false => Right(ag.copy(aircrafts = ag.aircrafts.appended(ar)))
+  def addAircrafts(la: Seq[Aircraft], ag: Agenda): Result[Agenda] =
+    la.foldLeft(Right(ag): Result[Agenda])((ag, ar) =>
+      ag.flatMap(addAircraft(ar, _))
+    )
 
-    def addRunways(lr: Seq[Runway], ag: Agenda): Result[Agenda] =
-        lr.foldLeft(Right(ag): Result[Agenda])((ag, r) =>
-            ag.flatMap(addRunway(r, _))
-        )
+  def addAircraft(ar: Aircraft, ag: Agenda): Result[Agenda] =
+    ag.aircrafts.exists(ar.id == _.id) match
+      case true  => Left(RepeatedAircraftId(ar.id))
+      case false => Right(ag.copy(aircrafts = ag.aircrafts.appended(ar)))
 
-    def addRunway(r: Runway, a: Agenda): Result[Agenda] =
-        a.runways.exists(r.id == _.id) match
-            case true => Left(RepeatedRunwayId(r.id))
-            case false => Right(a.copy(runways = a.runways.appended(r)))
+  def addRunways(lr: Seq[Runway], ag: Agenda): Result[Agenda] =
+    lr.foldLeft(Right(ag): Result[Agenda])((ag, r) =>
+      ag.flatMap(addRunway(r, _))
+    )
+
+  def addRunway(r: Runway, a: Agenda): Result[Agenda] =
+    a.runways.exists(r.id == _.id) match
+      case true  => Left(RepeatedRunwayId(r.id))
+      case false => Right(a.copy(runways = a.runways.appended(r)))
