@@ -11,6 +11,9 @@ enum DomainError:
     case IOFileProblem(error: String)
     case XMLError(error: String)
 
+    case RepeatedAircraftId(error: String)
+    case RepeatedRunwayId(error: String)
+
     // Simple Types Errors
     // Integers
     case NonNegativeIntError(error: String)
@@ -19,3 +22,5 @@ enum DomainError:
     case ScheduleError(error: String)
     case RunwayNotCompatible(error: String)
     case OperationTimeWindow(error: String)
+
+    case IllegalArgumentError(error: String)
