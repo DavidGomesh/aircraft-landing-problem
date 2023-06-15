@@ -10,9 +10,19 @@ import org.scalatest.funsuite.AnyFunSuite
 
 class AgendaTest extends AnyFunSuite:
 
+  val aircraftId1 = "A1"
+  val aircraftId2 = "A2"
+  val aircraftId3 = "A3"
+  val runwayId1 = "R1"
+  val runwayId2 = "R2"
+  val runwayId3 = "R3"
+  val target = 10
+  val maxTime = 900
+  val time = Some(5)
+
   test("Adding aircrafts to an agenda") {
-    val aircraft1 = Aircraft("A1", Class1, 10, 20, Some(5))
-    val aircraft2 = Aircraft("A2", Class2, 15, 25, Some(8))
+    val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime, time)
+    val aircraft2 = Aircraft(aircraftId2, Class2, target, maxTime, time)
     val agenda = Agenda(Seq.empty, Seq.empty)
 
     val result = Agenda.addAircrafts(Seq(aircraft1, aircraft2), agenda)
@@ -21,17 +31,17 @@ class AgendaTest extends AnyFunSuite:
   }
 
   test("Adding duplicate aircraft to an agenda should result in an error") {
-    val aircraft1 = Aircraft("A1", Class1, 10, 20, Some(5))
+    val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime, time)
     val agenda = Agenda(Seq(aircraft1), Seq.empty)
 
     val result = Agenda.addAircraft(aircraft1, agenda)
 
-    assert(result == Left(RepeatedAircraftId("A1")))
+    assert(result == Left(RepeatedAircraftId(aircraftId1)))
   }
 
   test("Adding runways to an agenda") {
-    val runway1 = Runway("R1", List(Class1, Class2), List())
-    val runway2 = Runway("R2", List(Class2, Class3), List())
+    val runway1 = Runway(runwayId1, List(Class1, Class2), List())
+    val runway2 = Runway(runwayId2, List(Class2, Class3), List())
     val agenda = Agenda(Seq.empty, Seq.empty)
 
     val result = Agenda.addRunways(Seq(runway1, runway2), agenda)
@@ -40,19 +50,19 @@ class AgendaTest extends AnyFunSuite:
   }
 
   test("Adding duplicate runway to an agenda should result in an error") {
-    val runway1 = Runway("R1", List(Class1, Class2), List())
+    val runway1 = Runway(runwayId1, List(Class1, Class2), List())
     val agenda = Agenda(Seq.empty, Seq(runway1))
 
     val result = Agenda.addRunway(runway1, agenda)
 
-    assert(result == Left(RepeatedRunwayId("R1")))
+    assert(result == Left(RepeatedRunwayId(runwayId1)))
   }
 
   test("Creating an agenda from aircrafts and runways") {
-    val aircraft1 = Aircraft("A1", Class1, 10, 20, Some(5))
-    val aircraft2 = Aircraft("A2", Class2, 15, 25, Some(8))
-    val runway1 = Runway("R1", List(Class1, Class2), List())
-    val runway2 = Runway("R2", List(Class2, Class3), List())
+    val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime, time)
+    val aircraft2 = Aircraft(aircraftId2, Class2, target, maxTime, time)
+    val runway1 = Runway(runwayId1, List(Class1, Class2), List())
+    val runway2 = Runway(runwayId2, List(Class2, Class3), List())
 
     val result = Agenda.from(Seq(aircraft1, aircraft2), Seq(runway1, runway2))
 
@@ -63,15 +73,15 @@ class AgendaTest extends AnyFunSuite:
 
   test("Agenda should be created with the given aircrafts, runways") {
     val aircrafts = Seq(
-      Aircraft("A1", Class1, (10), (20), Some(5)),
-      Aircraft("A2", Class2, (15), (25), Some(8)),
-      Aircraft("A3", Class3, (20), (30), None)
+      Aircraft(aircraftId1, Class1, target, maxTime, time),
+      Aircraft(aircraftId2, Class2, target, maxTime, time),
+      Aircraft(aircraftId3, Class3, target, maxTime, None)
     )
 
     val runways = Seq(
-      Runway("R1", List(Class1, Class2), List()),
-      Runway("R2", List(Class2, Class3), List()),
-      Runway("R3", List(Class3, Class4), List())
+      Runway(runwayId1, List(Class1, Class2), List()),
+      Runway(runwayId2, List(Class2, Class3), List()),
+      Runway(runwayId3, List(Class3, Class4), List())
     )
 
     val agenda = Agenda(aircrafts, runways)
@@ -85,15 +95,15 @@ class AgendaTest extends AnyFunSuite:
 
   test("Agenda should return the correct number of aircrafts") {
     val aircrafts = Seq(
-      Aircraft("A1", Class1, (10), (20), Some(5)),
-      Aircraft("A2", Class2, (15), (25), Some(8)),
-      Aircraft("A3", Class3, (20), (30), None)
+      Aircraft(aircraftId1, Class1, target, maxTime, time),
+      Aircraft(aircraftId2, Class2, target, maxTime, time),
+      Aircraft(aircraftId3, Class3, target, maxTime, time)
     )
 
     val runways = Seq(
-      Runway("R1", List(Class1, Class2), aircrafts),
-      Runway("R2", List(Class2, Class3), List()),
-      Runway("R3", List(Class3, Class4), List())
+      Runway(runwayId1, List(Class1, Class2), aircrafts),
+      Runway(runwayId2, List(Class2, Class3), List()),
+      Runway(runwayId3, List(Class3, Class4), List())
     )
 
     val agenda = Agenda(aircrafts, runways)
@@ -103,15 +113,15 @@ class AgendaTest extends AnyFunSuite:
 
   test("Agenda should return the correct number of runways") {
     val aircrafts = Seq(
-      Aircraft("A1", Class1, (10), (20), Some(5)),
-      Aircraft("A2", Class2, (15), (25), Some(8)),
-      Aircraft("A3", Class3, (20), (30), None)
+      Aircraft(aircraftId1, Class1, target, maxTime, time),
+      Aircraft(aircraftId2, Class2, target, maxTime, time),
+      Aircraft(aircraftId3, Class3, target, maxTime, None)
     )
 
     val runways = Seq(
-      Runway("R1", List(Class1, Class2), List()),
-      Runway("R2", List(Class2, Class3), List()),
-      Runway("R3", List(Class3, Class4), List())
+      Runway(runwayId1, List(Class1, Class2), List()),
+      Runway(runwayId2, List(Class2, Class3), List()),
+      Runway(runwayId3, List(Class3, Class4), List())
     )
 
     val agenda = Agenda(aircrafts, runways)
