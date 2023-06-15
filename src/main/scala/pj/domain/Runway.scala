@@ -41,4 +41,9 @@ object Runway:
         if minTime(a, r) > a.maxTime then Left(OperationTimeWindow("Out of operation time window!"))
         else Right(true)
 
+    def cost(lr: Seq[Runway]): NonNegativeInt = lr.map(_.cost).sum
+
+    def update(lr: Seq[Runway], r: Runway): Seq[Runway] =
+        val i = lr.indexWhere(old => old.id == r.id)
+        lr.updated(i, r)
 
