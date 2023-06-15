@@ -19,8 +19,14 @@ object AgendaIO:
     def load(path: String) = 
         for
             file <- FileIO.load(path)
-            la <- traverse((file\"aircrafts"\"aircraft"), xmlToAircraft(_, 900))
-            lr <- traverse((file\"runways"\"runway"), xmlToRunway(_))
+            a <- xmlToAgenda(file)
+        yield a
+
+    def xmlToAgenda(xml: Node): Result[Agenda] =
+        for
+            md <- fromAttribute(xml, "maximumDelayTime").map(_.toInt)
+            la <- traverse((xml\"aircrafts"\"aircraft"), xmlToAircraft(_, md))
+            lr <- traverse((xml\"runways"\"runway"), xmlToRunway(_))
             a <- Agenda.from(la, lr)
         yield a
 
