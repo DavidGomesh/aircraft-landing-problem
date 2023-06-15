@@ -1,7 +1,7 @@
 package pj.domain.schedule
 
 import scala.xml.Elem
-import pj.domain.*
+import pj.domain.Result
 
 
 object ScheduleMS01 extends Schedule:
