@@ -142,12 +142,13 @@ final case class Runway(
 )
 ```
 
-**Solution Algorithm**
+## Solution Algorithm
 
 For this milestone, three main algorithms were used:
 
 1. Brute Force Algorithm
-   The `bruteForce` method implements a brute force algorithm to find the optimal solution for aircraft scheduling. It performs an exhaustive search by testing all possible assignments of aircraft to runways, considering constraints to optimize or reduce the search space, and minimizing the total scheduling cost.
+
+The `bruteForce` method implements a brute force algorithm to find the optimal solution for aircraft scheduling. It performs an exhaustive search by testing all possible assignments of aircraft to runways, considering constraints to optimize or reduce the search space, and minimizing the total scheduling cost.
 
 The brute force algorithm starts with a list of aircraft `la` and a list of runways `lr`. It iterates over each aircraft in the list, attempting to assign it to each available runway.
 
@@ -156,7 +157,8 @@ For each aircraft-to-runway assignment, the algorithm checks if it violates any 
 The algorithm continues attempting to assign aircraft to runways until all aircraft have been allocated or no valid assignment is possible. It returns the sequence of runways that achieves the minimum total scheduling cost among all possible combinations.
 
 2. Combination Algorithm
-   The combination algorithm is used in the `createAllPossibilities` method to generate all possible combinations of aircraft scheduling for a specific runway.
+
+The combination algorithm is used in the `createAllPossibilities` method to generate all possible combinations of aircraft scheduling for a specific runway.
 
 This algorithm utilizes the concept of partitions of already scheduled aircraft on a runway. It iterates over the partitions, which consist of a sequence of already assigned aircraft and a sequence of remaining aircraft.
 
@@ -165,7 +167,8 @@ For each partition, the algorithm assigns the current aircraft (the one being co
 The algorithm continues iterating over all partitions and constructs all possible combinations of aircraft scheduling. It returns the resulting list of runways containing all generated combinations.
 
 3. Recursive Algorithm
-   The `bruteForce` and `loop` methods utilize recursion to systematically traverse the lists of aircraft and runways.
+
+The `bruteForce` and `loop` methods utilize recursion to systematically traverse the lists of aircraft and runways.
 
 The `bruteForce` method is primarily responsible for recursively calling the `loop` method for each aircraft in the list. It passes the remaining aircraft list and the updated runway list as arguments. The recursion occurs until all aircraft have been assigned or no valid assignment is possible.
 
