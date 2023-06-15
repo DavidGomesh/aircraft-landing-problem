@@ -150,6 +150,10 @@ For this milestone, three main algorithms were used:
 
 The `bruteForce` method implements a brute force algorithm to find the optimal solution for aircraft scheduling. It performs an exhaustive search by testing all possible assignments of aircraft to runways, considering constraints to optimize or reduce the search space, and minimizing the total scheduling cost.
 
+```scala
+def bruteForce(la: Seq[Aircraft], lr: Seq[Runway]): Option[Seq[Runway]]
+```
+
 The brute force algorithm starts with a list of aircraft `la` and a list of runways `lr`. It iterates over each aircraft in the list, attempting to assign it to each available runway.
 
 For each aircraft-to-runway assignment, the algorithm checks if it violates any constraints, such as the aircraft's operation time window or compatibility between aircraft type and runway. If the assignment does not violate any constraints, the algorithm updates the runway list with the assigned aircraft and recursively calls the `bruteForce` method for the remaining aircraft.
@@ -159,6 +163,10 @@ The algorithm continues attempting to assign aircraft to runways until all aircr
 **Combination Algorithm**
 
 The combination algorithm is used in the `createAllPossibilities` method to generate all possible combinations of aircraft scheduling for a specific runway.
+
+```scala
+def createAllPossibilities(r: Runway, a: Aircraft): Seq[Runway]
+```
 
 This algorithm utilizes the concept of partitions of already scheduled aircraft on a runway. It iterates over the partitions, which consist of a sequence of already assigned aircraft and a sequence of remaining aircraft.
 
@@ -173,6 +181,10 @@ The `bruteForce` and `loop` methods utilize recursion to systematically traverse
 The `bruteForce` method is primarily responsible for recursively calling the `loop` method for each aircraft in the list. It passes the remaining aircraft list and the updated runway list as arguments. The recursion occurs until all aircraft have been assigned or no valid assignment is possible.
 
 `loop`, on the other hand, receives as an argument the list of aircraft groups and the list of runways. It iterates over the aircraft groups and recursively calls the `bruteForce` method for each group, passing the updated runway list as an argument. The recursion runs until all aircraft groups have been processed.
+
+```scala
+def loop(aircrafts: Seq[Seq[Aircraft]], lr: Seq[Runway]): Result[Seq[Runway]]
+```
 
 The aircraft are divided into groups of 10 aircraft each. For example, if the original aircraft list has 60 aircraft, there will be 6 groups of 10 aircraft. This approach efficiently reduces the execution time of the brute force algorithm, making it more efficient and accelerating the search for a solution.
 
