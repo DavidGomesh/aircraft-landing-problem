@@ -9,4 +9,4 @@ type NonNegativeInt = Int
 object NonNegativeInt:
     def apply(n: Int): Result[NonNegativeInt] =
         if n > 0 then Right(n) 
-        else Left(NonNegativeIntError("Number must be greater then zero"))
+        else Left(NonNegativeIntError("Number must be greater than zero"))

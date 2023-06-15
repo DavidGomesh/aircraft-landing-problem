@@ -15,3 +15,7 @@ enum DomainError:
     // Integers
     case NonNegativeIntError(error: String)
     case PositiveIntError(error: String)
+
+    case ScheduleError(error: String)
+    case RunwayNotCompatible(error: String)
+    case OperationTimeWindow(error: String)
