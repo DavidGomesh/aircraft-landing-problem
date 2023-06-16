@@ -17,9 +17,12 @@ import domain.Runway
 import domain.Runway.*
 import simpleTypes.identifier.RunwayId
 
+// " Ola ".trim + "ola"
+
 for
+    // a <- AgendaIO.load("files\\assessment\\ms03\\invalid01_in.xml")
     a <- AgendaIO.load("files\\assessment\\ms03\\valid_FRA_01_in.xml")
-    r <- ScheduleMS03.bruteForce(a)
+    r <- ScheduleMS03.generatePlan(a)
     p <- ScheduleIO.planToXml(r)
 yield p
 

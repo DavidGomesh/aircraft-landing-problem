@@ -19,14 +19,13 @@ object ScheduleMS03 extends Schedule:
 
     // TODO: Create the code to implement a functional domain model for schedule creation
     //       Use the xml.XML code to handle the xml elements
-    //       Refer to https://github.com/scala/scala-xml/wiki/XML-Processing for xml creation  
-    def create(xml: Elem): Result[Elem] = 
+    //       Refer to https://github.com/scala/scala-xml/wiki/XML-Processing for xml creation
+    def create(xml: Elem): Result[Elem] =
         for
             a <- xmlToAgenda(xml)
-            r <- bruteForce(a)
+            r <- generatePlan(a)
             p <- planToXml(r)
         yield p
-        
 
     def createGroups(l: Seq[Aircraft]): Seq[Seq[Aircraft]] = l match
         case Nil => Nil
@@ -35,9 +34,9 @@ object ScheduleMS03 extends Schedule:
             chunk +: createGroups(remaining)
         }
 
-    def createPartitions(aircrafts: Seq[Aircraft]): Seq[Partition] = 
+    def createPartitions(aircrafts: Seq[Aircraft]): Seq[Partition] =
         @tailrec
-        def loop(la: Seq[Aircraft], lp: Seq[Partition]): Seq[Partition] = la match 
+        def loop(la: Seq[Aircraft], lp: Seq[Partition]): Seq[Partition] = la match
             case Nil => lp
             case head +: remaining => {
                 val scheduled = lp.lastOption.fold(Seq(head))(_._1 :+ head)
@@ -45,50 +44,53 @@ object ScheduleMS03 extends Schedule:
             }
         loop(aircrafts, Seq((Seq.empty, aircrafts)))
 
-    def createAllPossibilities(r: Runway, a: Aircraft): Seq[Runway] = 
-        createPartitions(r.aircrafts).flatMap { case (la, remaining) => 
+    def createAllPossibilities(r: Runway, a: Aircraft): Seq[Runway] =
+        createPartitions(r.aircrafts).flatMap { case (la, remaining) =>
             for
                 r <- assign(a, r.setAircrafts(la)).toOption
                 r <- assign(remaining, r).toOption
             yield r
         }
 
-    def bruteForce_2(la: Seq[Aircraft], lr: Seq[Runway]): Option[Seq[Runway]] = la match
-        case Nil => Some(lr)
-        case a +: remainingAircrafts => 
-            val ls = lr.flatMap (
-                runway => assign(a, runway).fold(  
-                    
-                    error => error match
-                        case OperationTimeWindow(error) => 
+    def bruteForce(la: Seq[Aircraft], lr: Seq[Runway]): Result[Seq[Runway]] = la match
+        case Nil => Right(lr)
+        case a +: remainingAircrafts =>
+            val updatedRunways = lr.flatMap { runway =>
+                assign(a, runway).fold(
+                    error => error match {
+                        case OperationTimeWindow(errorMsg) =>
                             val allPoss = createAllPossibilities(runway, a)
-                            allPoss.minByOption(_.cost) match
-                                case Some(r) => bruteForce_2(remainingAircrafts, Runway.update(lr, r))
-                                case None => Nil
+                            allPoss.minByOption(_.cost) match {
+                                case Some(r) => bruteForce(remainingAircrafts, Runway.update(lr, r)).right.toSeq
+                                case None    => Nil
+                            }
                         case _ => Nil
-                    
-                    , updatedRunway => 
-
-                    if runway.cost < updatedRunway.cost then
-                        val allPoss = createAllPossibilities(runway, a)
-                        allPoss.minByOption(_.cost) match
-                            case Some(r) => bruteForce_2(remainingAircrafts, Runway.update(lr, r))
-                            case None => bruteForce_2(remainingAircrafts, Runway.update(lr, updatedRunway))
-                    else
-                        bruteForce_2(remainingAircrafts, Runway.update(lr, updatedRunway))
+                    },
+                    updatedRunway => {
+                        if (runway.cost < updatedRunway.cost) {
+                            val allPoss = createAllPossibilities(runway, a)
+                            allPoss.minByOption(_.cost) match {
+                                case Some(r) => bruteForce(remainingAircrafts, Runway.update(lr, r)).right.toSeq
+                                case None    => bruteForce(remainingAircrafts, Runway.update(lr, updatedRunway)).right.toSeq
+                            }
+                        } else {
+                            bruteForce(remainingAircrafts, Runway.update(lr, updatedRunway)).right.toSeq
+                        }
+                    }
                 )
-            )
-            ls.minByOption(Runway.cost(_))
+            }
 
-    def bruteForce(a: Agenda): Result[Plan] = {
+            updatedRunways.minByOption(Runway.cost(_)).toRight(NoRunwaysAvailable(a.id))
+
+    def generatePlan(a: Agenda): Result[Plan] = {
         val aircrafts = createGroups(a.aircrafts)
         
         def bruteForceHelper(aircrafts: Seq[Seq[Aircraft]], lr: Seq[Runway]): Result[Seq[Runway]] = aircrafts match
                 case Nil => Right(lr)
                 case aircraftList +: remainingAircrafts =>
-                    bruteForce_2(aircraftList, lr) match
-                        case Some(lr) => bruteForceHelper(remainingAircrafts, lr)
-                        case None => Left(Error("Deu nao o"))
+                    bruteForce(aircraftList, lr) match
+                        case Right(lr) => bruteForceHelper(remainingAircrafts, lr)
+                        case Left(e) => Left(e)
             
         bruteForceHelper(aircrafts, a.runways).fold(e => Left(e), lr => Right(Plan(lr)))
     }
