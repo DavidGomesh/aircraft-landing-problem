@@ -425,6 +425,14 @@ The predicted combinations are defined as a series of runways with various aircr
 
 Using the assert statement, the test asserts that the result matches the intended combinations.
 
+## Final Considerations 
+
+A brute-force approach was created in milestone three to solve the Aircraft Scheduling Problem (ASP) by exhaustively trying all potential permutations to identify the most effective arrangement of aircraft on runways. The algorithm assures that the optimal scheduling arrangement is identified at a cost equal to or lower than the one reached in milestone one.
+
+The brute force algorithm, the combination algorithm, and the recursive algorithm comprise the solution algorithm. The bruteForce approach conducts an exhaustive search by assigning aircraft to runways while taking constraints into account and minimizing total scheduling cost. The createAllPossibilities method generates all conceivable aircraft schedule combinations for a given runway. The loop method executes the bruteForce method iteratively for each aircraft group, splitting the aircraft into smaller groups to shorten execution time.
+
+Overall, milestone three met the goal of creating code that executes scheduling at a cost equivalent to or less than milestone one. The brute-force algorithm, which is supported by the defined classes and algorithms, exhaustively investigates all possible combinations in order to discover the best solution to the Aircraft Scheduling Problem.
+
 
 
 
