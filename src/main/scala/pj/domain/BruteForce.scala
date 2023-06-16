@@ -30,7 +30,7 @@ object BruteForce:
         case Nil => Some(lr)
         case a +: remaining => lr.flatMap (r => assign(a, r).fold(
             handleTimeWindowError(_, r, a, lr, remaining),
-            createOtherPossibilities(r, _, a, remaining, lr)
+            generateOtherPossibilities(r, _, a, remaining, lr)
         )).minByOption(Runway.cost)
 
     // Create aircraft groups to execute the brute force algorithm.
@@ -44,7 +44,7 @@ object BruteForce:
     // Reallocate an aircraft to another position on a runway in case of a delay that exceeds the time window.
     def handleTimeWindowError(e: DomainError, r: Runway, a: Aircraft, lr: Seq[Runway], remaining: Seq[Aircraft]) = e match
         case OperationTimeWindow(_) =>
-            createBetterPossibility(r, a).flatMap(r => bruteForce(remaining, Runway.update(lr, r)))
+            generateBetterPossibility(r, a).flatMap(r => bruteForce(remaining, Runway.update(lr, r)))
         case _ => None
 
 
