@@ -332,3 +332,102 @@ These properties and generators are used in conjunction with a property testing 
 - This code defines a property that checks whether two or more aircraft on a runway are assigned simultaneous times. It generates test cases using a generator called `genAgenda` and then verifies that the scheduled aircrafts on the runways do not have overlapping times.
 
 ### Functional Tests
+
+The code you gave is a test suite for a functional domain model related to schedule creation. Let's go through the tests one by one:
+
+--- 
+
+```scala
+test("generatePlan should return an error for an invalid agenda")
+```
+
+`generatePlan` should generate the following plan for a valid agenda:
+
+This test determines whether or not the `generatePlan` function generates the required plan for a valid agenda.
+
+It generates an `Agenda` object that has a list of planes and runways.
+
+The `generatePlan` function is then called with the agenda and the outcome is saved.
+Finally, it uses the assert statement to compare the result to the intended plan.
+
+---
+
+```scala
+ test("generatePlan should return an error for an invalid agenda") 
+```
+
+For an invalid agenda, `generatePlan` should return an error:
+
+This test determines whether the `generatePlan` function gives an error for an incorrect agenda.
+
+It generates an `Agenda` object with a list of aircrafts and runways, where one runway has competing class types.
+
+The `generatePlan` function is run with the agenda, and the outcome is saved.
+The assert statement is used by the test to assert that the result is an error (Left).
+
+---
+
+```scala
+test("createGroups should divide the aircraft list into groups of size 10")
+```
+The aircraft list should be divided into 10 groups by `createGroups`:
+
+This test validates the behavior of the function `createGroups`
+
+It generates a list of aircrafts with 15 entries.
+
+The aircraft list is passed to the `createGroups` function, and the result is saved.
+Using assert statements, the test asserts the length of the groups list (2) and the lengths of the individual groups.
+
+---
+
+```scala
+test("createPartitions should correctly partition the aircrafts")
+```
+
+`createPartitions` should partition the aircrafts correctly:
+
+This test verifies the functionality of the `createPartitions` function.
+
+It uses the aircraft list to invoke the `createPartitions` method.
+
+The assert statement is used to compare the expected partitions with the actual partitions and to verify the length of the partitions list (4).
+
+---
+
+```scala
+ test("bruteForce should find the optimal solution")
+```
+
+The best solution should be found through `bruteForce`:
+
+This check guarantees that the `bruteForce` function finds the best option for scheduling planes on runways.
+
+The aircraft and runway lists are passed to the `bruteForce` function, and the result is saved.
+
+The expected outcome is a series of runways with allocated aircrafts.
+Using the assert command, the test affirms that the result matches the expected result.
+
+---
+
+```scala
+  test("createAllPossibilities should generate all possible combinations") 
+```
+
+All potential combinations should be generated with `createAllPossibilities`:
+
+This test validates the behavior of the function `createAllPossibilities`.
+It generates a runway and an aircraft object.
+
+The runway and aircraft are passed to the `createAllPossibilities` function, and the result is saved.
+
+The predicted combinations are defined as a series of runways with various aircraft assignment combinations.
+
+Using the assert statement, the test asserts that the result matches the intended combinations.
+
+
+
+
+
+
+
