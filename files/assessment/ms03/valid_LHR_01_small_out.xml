@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<schedule 
+cost="581" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../schedule.xsd " xmlns="http://www.dei.isep.ipp.pt/tap-2023" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <aircraft id="Aircraft1" runway="Northern Runway" time="0"/>
+    <aircraft id="Aircraft4" runway="Northern Runway" time="67"/>
+    <aircraft id="Aircraft5" runway="Northern Runway" time="155"/>
+    <aircraft id="Aircraft7" runway="Northern Runway" time="221"/>
+    <aircraft id="Aircraft3" runway="Northern Runway" time="296"/>
+    <aircraft id="Aircraft10" runway="Northern Runway" time="363"/>
+    <aircraft id="Aircraft11" runway="Northern Runway" time="423"/>
+    <aircraft id="Aircraft13" runway="Northern Runway" time="513"/>
+    <aircraft id="Aircraft15" runway="Northern Runway" time="633"/>
+    <aircraft id="Aircraft8" runway="Northern Runway" time="693"/>
+    <aircraft id="Aircraft2" runway="Southern Runway" time="8"/>
+    <aircraft id="Aircraft6" runway="Southern Runway" time="179"/>
+    <aircraft id="Aircraft9" runway="Southern Runway" time="319"/>
+    <aircraft id="Aircraft12" runway="Southern Runway" time="450"/>
+    <aircraft id="Aircraft14" runway="Southern Runway" time="531"/>
+</schedule>
+
