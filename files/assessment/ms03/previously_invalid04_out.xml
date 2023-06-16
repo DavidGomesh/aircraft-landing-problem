@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schedule cost="4544" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../schedule.xsd " xmlns="http://www.dei.isep.ipp.pt/tap-2023" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <aircraft id="Aircraft2" runway="Runway1" time="1"/>
+    <aircraft id="Aircraft8" runway="Runway1" time="83"/>
+    <aircraft id="Aircraft6" runway="Runway1" time="165"/>
+    <aircraft id="Aircraft4" runway="Runway1" time="247"/>
+    <aircraft id="Aircraft7" runway="Runway1" time="307"/>
+    <aircraft id="Aircraft5" runway="Runway1" time="403"/>
+    <aircraft id="Aircraft3" runway="Runway1" time="499"/>
+    <aircraft id="Aircraft1" runway="Runway1" time="595"/>
+</schedule>

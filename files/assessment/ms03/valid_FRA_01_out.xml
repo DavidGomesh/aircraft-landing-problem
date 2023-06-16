@@ -62,4 +62,3 @@ cost="949" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../schedul
     <aircraft id="Aircraft54" runway="Runway West" time="1610"/>
     <aircraft id="Aircraft57" runway="Runway West" time="1700"/>
 </schedule>
-
