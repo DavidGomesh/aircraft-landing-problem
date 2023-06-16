@@ -26,3 +26,4 @@ object ClassType:
         case "5" => Class5
         case "6" => Class6
     
+    def getClassNum(c: ClassType): String = c.toString.replace("Class", "")

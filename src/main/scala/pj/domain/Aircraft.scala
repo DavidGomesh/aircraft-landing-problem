@@ -23,5 +23,8 @@ final case class Aircraft(
 object Aircraft:
     def apply(id: AircraftId, ct: ClassType, t: NonNegativeInt, e: PositiveInt): Aircraft =
         Aircraft(id, ct, t, e, Option.empty)
+
+    def exists(a: Aircraft, la: Seq[Aircraft]): Boolean = 
+        la.exists(_.id == a.id)
     
     
