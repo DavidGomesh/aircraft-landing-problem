@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda maximumDelayTime="900" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dei.isep.ipp.pt/tap-2023" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../agenda.xsd">
+    <aircrafts>
+        <aircraft id="A1" class="3" target="0"/>
+        <aircraft id="A2" class="3" target="0"/>
+        <aircraft id="A3" class="3" target="0"/>
+        <aircraft id="A4" class="3" target="0" emergency="10"/>
+        <aircraft id="A5" class="3" target="0"/>
+        <aircraft id="A6" class="3" target="0"/>
+        <aircraft id="A7" class="3" target="0"/>
+        <aircraft id="A8" class="3" target="0"/>
+        <aircraft id="A9" class="3" target="0"/>
+        <aircraft id="A10" class="3" target="0"/>
+        <aircraft id="A11" class="3" target="0"/>
+        <aircraft id="A12" class="3" target="0"/>
+    </aircrafts>
+    <runways>
+        <runway id="R1">
+            <handles class="1"/>
+            <handles class="2"/>
+            <handles class="3"/>
+            <handles class="4"/>
+            <handles class="5"/>
+            <handles class="6"/>
+        </runway>
+    </runways>
+</agenda>

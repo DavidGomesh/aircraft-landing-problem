@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda maximumDelayTime="900" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dei.isep.ipp.pt/tap-2023" xsi:schemaLocation="http://www.dei.isep.ipp.pt/tap-2023 ../../agenda.xsd">
+    <aircrafts>
+        <aircraft id="A4" class="1" target="16" emergency="5"/>
+        <aircraft id="A1" class="5" target="107"/>
+        <aircraft id="A2" class="2" target="141"/>
+        <aircraft id="A3" class="3" target="207"/>
+        <aircraft id="A5" class="2" target="215" emergency="5"/>
+        <aircraft id="A6" class="6" target="329"/>
+        <aircraft id="A7" class="1" target="354"/>
+        <aircraft id="A11" class="1" target="374" emergency="10"/>
+        <aircraft id="A8" class="2" target="426"/>
+        <aircraft id="A9" class="3" target="629"/>
+        <aircraft id="A10" class="6" target="650"/>
+        <aircraft id="A12" class="2" target="653" emergency="10"/>
+        <aircraft id="A13" class="6" target="697"/>
+        <aircraft id="A14" class="4" target="716"/>
+        <aircraft id="A15" class="3" target="911"/>
+        <aircraft id="A16" class="4" target="924" emergency="5"/>
+        <aircraft id="A17" class="2" target="927"/>
+        <aircraft id="A18" class="6" target="934"/>
+        <aircraft id="A19" class="1" target="951"/>
+        <aircraft id="A20" class="5" target="964" emergency="10"/>
+        <aircraft id="A21" class="3" target="1000"/>
+        <aircraft id="A22" class="4" target="1044" emergency="5"/>
+        <aircraft id="A23" class="2" target="1065"/>
+        <aircraft id="A24" class="6" target="1075"/>
+        <aircraft id="A25" class="1" target="1082"/>
+        <aircraft id="A26" class="5" target="1112" emergency="10"/>
+        <aircraft id="A27" class="3" target="1167"/>
+        <aircraft id="A28" class="4" target="1176" emergency="5"/>
+        <aircraft id="A29" class="2" target="1280"/>
+        <aircraft id="A30" class="6" target="1288"/>
+        <aircraft id="A31" class="1" target="1376"/>
+        <aircraft id="A32" class="5" target="1427" emergency="10"/>
+        <aircraft id="A33" class="3" target="1440"/>
+        <aircraft id="A34" class="4" target="1575" emergency="5"/>
+        <aircraft id="A35" class="2" target="1601"/>
+        <aircraft id="A36" class="6" target="1614"/>
+        <aircraft id="A37" class="1" target="1639"/>
+        <aircraft id="A38" class="5" target="1722" emergency="10"/>
+        <aircraft id="A39" class="3" target="1728"/>
+        <aircraft id="A40" class="4" target="1767" emergency="5"/>
+        <aircraft id="A41" class="2" target="1789"/>
+        <aircraft id="A42" class="6" target="1852"/>
+        <aircraft id="A43" class="1" target="1905"/>
+        <aircraft id="A44" class="5" target="1919" emergency="10"/>
+        <aircraft id="A45" class="3" target="1997"/>
+        <aircraft id="A46" class="4" target="2010" emergency="5"/>
+        <aircraft id="A47" class="2" target="2118"/>
+        <aircraft id="A48" class="6" target="2159"/>
+        <aircraft id="A49" class="1" target="2176"/>
+        <aircraft id="A50" class="5" target="2218" emergency="10"/>
+        <aircraft id="A51" class="3" target="2219"/>
+        <aircraft id="A52" class="4" target="2243" emergency="5"/>
+        <aircraft id="A53" class="2" target="2253"/>
+        <aircraft id="A54" class="6" target="2291"/>
+        <aircraft id="A55" class="1" target="2295"/>
+        <aircraft id="A56" class="5" target="2296" emergency="10"/>
+        <aircraft id="A57" class="3" target="2311"/>
+        <aircraft id="A58" class="4" target="2351" emergency="5"/>
+        <aircraft id="A59" class="2" target="2464"/>
+        <aircraft id="A60" class="6" target="2474"/>
+        <aircraft id="A61" class="1" target="2502"/>
+        <aircraft id="A62" class="5" target="2512" emergency="10"/>
+        <aircraft id="A63" class="3" target="2527"/>
+        <aircraft id="A64" class="4" target="2539" emergency="5"/>
+        <aircraft id="A65" class="2" target="2579"/>
+        <aircraft id="A66" class="6" target="2590"/>
+        <aircraft id="A67" class="1" target="2594"/>
+        <aircraft id="A68" class="5" target="2603" emergency="10"/>
+        <aircraft id="A69" class="3" target="2657"/>
+        <aircraft id="A70" class="4" target="2666" emergency="5"/>
+        <aircraft id="A71" class="2" target="2683"/>
+        <aircraft id="A72" class="6" target="2712"/>
+        <aircraft id="A73" class="1" target="2732"/>
+        <aircraft id="A74" class="5" target="2746" emergency="10"/>
+        <aircraft id="A75" class="3" target="2853"/>
+        <aircraft id="A76" class="4" target="2875" emergency="5"/>
+        <aircraft id="A77" class="2" target="2939"/>
+        <aircraft id="A78" class="6" target="2949"/>
+        <aircraft id="A79" class="1" target="2971"/>
+        <aircraft id="A80" class="5" target="2978" emergency="10"/>
+        <aircraft id="A81" class="3" target="3132"/>
+        <aircraft id="A82" class="4" target="3136" emergency="5"/>
+        <aircraft id="A83" class="2" target="3167"/>
+        <aircraft id="A84" class="6" target="3197"/>
+        <aircraft id="A85" class="1" target="3396"/>
+        <aircraft id="A86" class="5" target="3415" emergency="10"/>
+        <aircraft id="A87" class="3" target="3432"/>
+        <aircraft id="A88" class="4" target="3443" emergency="5"/>
+        <aircraft id="A89" class="2" target="3448"/>
+        <aircraft id="A90" class="6" target="3511"/>
+        <aircraft id="A91" class="1" target="3627"/>
+        <aircraft id="A92" class="5" target="3629" emergency="10"/>
+        <aircraft id="A93" class="3" target="3631"/>
+        <aircraft id="A94" class="4" target="3669" emergency="5"/>
+        <aircraft id="A95" class="2" target="3738"/>
+        <aircraft id="A96" class="6" target="3762"/>
+        <aircraft id="A97" class="1" target="3794"/>
+        <aircraft id="A98" class="5" target="3855" emergency="10"/>
+        <aircraft id="A99" class="3" target="3857"/>
+        <aircraft id="A100" class="4" target="3942" emergency="5"/>
+    </aircrafts>
+    <runways>
+        <runway id="R1">
+            <handles class="1"/>
+            <handles class="2"/>
+            <handles class="3"/>
+            <handles class="4"/>
+            <handles class="5"/>
+        </runway>
+        <runway id="R2">
+            <handles class="1"/>
+            <handles class="2"/>
+            <handles class="4"/>
+            <handles class="5"/>
+            <handles class="6"/>
+        </runway>
+        <runway id="R3">
+            <handles class="1"/>
+            <handles class="2"/>
+            <handles class="4"/>
+            <handles class="5"/>
+            <handles class="6"/>
+        </runway>
+    </runways>
+</agenda>
