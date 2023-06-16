@@ -8,6 +8,9 @@ import simpleTypes.integer.*
 
 object AttributesGenerator extends Properties("AttributesGenerator"):
 
+    val max = 6
+    val min = 1
+
     def genAircraftId(numCharacters: Int): Gen[AircraftId] = 
       Gen.listOfN(numCharacters, Gen.alphaNumChar).map(_.mkString).flatMap(str => 
         AircraftId.apply(str).fold(_=> Gen.fail, Gen.const)
@@ -24,25 +27,8 @@ object AttributesGenerator extends Properties("AttributesGenerator"):
       Gen.choose(minValue, maxValue).flatMap(number =>
         NonNegativeInt.apply(number).fold(_ => Gen.fail, Gen.const)
       )
-
-    // def genAircraftTime: Gen[Option[NonNegativeInt]] = 
-    //   Gen.option(Gen.posNum[Int].flatMap { value =>
-    //     NonNegativeInt.apply(value) match {
-    //       case Right(positiveInt) => Gen.const(positiveInt)
-    //       case Left(_) => Gen.fail[NonNegativeInt]
-    //     }
-    //   })
-
-    def genAircraftEmergency: Gen[Option[PositiveInt]] = 
-      Gen.option(Gen.posNum[Int].flatMap { value =>
-        PositiveInt.apply(value) match {
-          case Right(positiveInt) => Gen.const(positiveInt)
-          case Left(_) => Gen.fail[PositiveInt]
-        }
-      })
-
-    def genClassRunway: Gen[List[ClassType]] = 
+    def genClassRunway: Gen[List[ClassType]] =
       for
-          genValue <- Gen.choose(1, 6)
+          genValue <- Gen.choose(min, max)
           classRunway <- Gen.listOfN(genValue, genClassType)
       yield classRunway

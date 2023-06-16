@@ -1,6 +1,7 @@
 package domain.properties
 
 import org.scalacheck.Properties
+import org.scalacheck.Prop.forAll
 import org.scalacheck.Gen
 import domain.Runway
 import domain.Aircraft
@@ -8,21 +9,35 @@ import domain.AttributesGenerator.genAircraftId
 import simpleTypes.identifier.*
 import domain.AttributesGenerator.*
 import simpleTypes.integer.NonNegativeInt
+import domain.properties.RunwaysProperties.genRunways
 
 
 object AircraftsProperties extends Properties("AircraftsProperties"):
-   ???
 
-    // def genAircrafts(runways: List[Runway]): Gen[List[Aircraft]] =
-    //   for 
-    //     num <- Gen.choose(1, 10)
-    //     lid <- Gen.listOfN(num, genAircraftId(4))
-    //     aircrafts <- Gen.sequence[List[Aircraft], Aircraft](lid.distinct.map(genAircraft(_, runways)))
-    //   yield aircrafts
+    val min = 1
+    val max = 6
+    val maxDelay = 0
+    val numCharId = 4
 
-    // def genAircraft(id: AircraftId, runways: List[Runway]): Gen[Aircraft] =
-    //   for 
-    //     classType <-  Gen.oneOf(runways.flatMap(_.classes))
-    //     target <- genAircraftTarget(0, 2000)
-    //     emergency <- Gen.frequency(5 -> None, 1 -> genAircraftEmergency)
-    //   yield Aircraft(id, classType, target, emergency, None)
+    def genAircrafts(runways: Seq[Runway]): Gen[List[Aircraft]] =
+      for 
+        num <- Gen.choose(min, max)
+        lid <- Gen.listOfN(num, genAircraftId(numCharId))
+        aircrafts <- Gen.sequence[List[Aircraft], Aircraft](lid.distinct.map(genAircraft(_, runways)))
+      yield aircrafts
+
+    def genAircraft(id: AircraftId, runways: Seq[Runway]): Gen[Aircraft] =
+      for 
+        classType <-  Gen.oneOf(runways.flatMap(_.classes))
+        target <- genAircraftTarget(min, maxDelay)
+        maxDelayTime <- Gen.frequency(1 -> (target + max), 5 -> (target + maxDelay))  
+      yield Aircraft(id, classType, target, maxDelayTime, Some(0))
+
+
+    property("Generated Aircraft") = forAll(genRunways, genRunwayId(numCharId)) { (runways, id) =>
+      forAll(genAircraft(id, runways)) { aircraft =>
+          val aircraftClass = aircraft.classType
+          val runwayClasses = runways.flatMap(_.classes)
+          runwayClasses.contains(aircraftClass)
+      }
+    }
