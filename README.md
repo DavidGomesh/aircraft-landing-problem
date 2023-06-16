@@ -189,3 +189,84 @@ def loop(aircrafts: Seq[Seq[Aircraft]], lr: Seq[Runway]): Result[Seq[Runway]]
 The aircraft are divided into groups of 10 aircraft each. For example, if the original aircraft list has 60 aircraft, there will be 6 groups of 10 aircraft. This approach efficiently reduces the execution time of the brute force algorithm, making it more efficient and accelerating the search for a solution.
 
 These algorithms are combined to perform an exhaustive search of all possible scheduling combinations, aiming to find the optimal solution that minimizes the total scheduling cost.
+
+
+## Tests
+
+Testing an application is necessary to assure the software's quality, reliability, and usability. They enable the identification and correction of flaws, defects, and functional failures, as well as the verification that the application satisfies the set criteria. Testing also aids in improving the user experience by finding usability issues and optimizing the interface and interaction. Furthermore, they ensure the integrity of the data handled by the application and ease the maintenance and continual evolution of the software, giving developers confidence when making changes to the code. In summary, testing is necessary to assure a high-quality and dependable product for end customers.
+
+### Unit Tests
+
+**Agenda Test**
+
+The test suite includes several test cases that verify the behavior of the Agenda class when adding aircrafts and runways to an agenda, checking for errors when adding duplicate aircraft or runways, creating an agenda from aircrafts and runways, and retrieving the correct number of aircrafts and runways from an agenda.
+
+```scala
+  test("Creating an agenda from aircrafts and runways") {
+    val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime, time)
+    val aircraft2 = Aircraft(aircraftId2, Class2, target, maxTime, time)
+    val runway1 = Runway(runwayId1, List(Class1, Class2), List())
+    val runway2 = Runway(runwayId2, List(Class2, Class3), List())
+
+    val result = Agenda.from(Seq(aircraft1, aircraft2), Seq(runway1, runway2))
+
+    val expected =
+      Right(Agenda(Seq(aircraft1, aircraft2), Seq(runway1, runway2)))
+    assert(result == expected)
+  }
+```
+
+**Aircraft Test**
+
+The tests cover a variety of circumstances, such as when the aircraft's current flight time exceeds the goal altitude, when the aircraft is of Class2 type, and when the aircraft is of an invalid class type.
+
+```scala
+  test("delay should calculate the correct delay when time is greater than target") {
+    val aircraft = Aircraft("A1", Class1, target, maxTime, Some(time))
+    assert(aircraft.delay == delay)
+  }
+```
+
+```scala
+  test("cost should be calculated correctly for Class2") {
+    val aircraft = Aircraft("A2", Class2, target, maxTime, Some(time))
+    assert(aircraft.cost == cost)
+  }
+```
+
+**Runway Test**
+
+The tests cover a variety of scenarios, including creating a runway with no aircrafts, adding an aircraft to a runway, assigning a single aircraft to a runway, and updating a runway in a sequence of runways.
+
+```scala
+  test("Creating Runway with empty aircrafts should have zero cost") {
+    val runway = Runway(runwayId1, List(Class1, Class2, Class3, Class4), List())
+    assert(runway.cost == 0)
+  }
+```
+
+```scala
+  test("Runway is compatible with an aircraft") {
+    val a = Aircraft(aircraftId1, Class4, target, maxTime, time)
+    val runway = Runway(runwayId1, List(Class1, Class2, Class4), List())
+
+    assert(runway.isCompatible(a))
+  }
+```
+
+**Separation Test**
+
+This code offers a test suite for the Separation class, which computes the distance between two aircrafts as well as the shortest time required to land on a runway.
+
+```scala
+  test("separation between aircrafts") {
+    val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime)
+    val aircraft2 = Aircraft(aircraftId2, Class2, target, maxTime)
+    assert(Separation.separation(aircraft1, aircraft2) == 69)
+  }
+```
+
+## Functional Tests
+
+
+
