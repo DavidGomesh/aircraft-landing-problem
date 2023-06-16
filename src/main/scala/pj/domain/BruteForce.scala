@@ -19,7 +19,7 @@ object BruteForce:
             case Nil => Right(lr)
             case la +: rm => bruteForce(la, lr) match
                 case Some(lr) => loop(rm, lr)
-                case None => Left(Error("Unexpected error"))
+                case None => Left(OperationTimeWindow("Maximum delay time reached"))
             
         loop(createGroups(a.aircrafts), a.runways).fold
             (Left(_), lr => Right(Plan(lr))
