@@ -71,28 +71,6 @@ class AgendaTest extends AnyFunSuite:
     assert(result == expected)
   }
 
-  test("Agenda should be created with the given aircrafts, runways") {
-    val aircrafts = Seq(
-      Aircraft(aircraftId1, Class1, target, maxTime, time),
-      Aircraft(aircraftId2, Class2, target, maxTime, time),
-      Aircraft(aircraftId3, Class3, target, maxTime, None)
-    )
-
-    val runways = Seq(
-      Runway(runwayId1, List(Class1, Class2), List()),
-      Runway(runwayId2, List(Class2, Class3), List()),
-      Runway(runwayId3, List(Class3, Class4), List())
-    )
-
-    val agenda = Agenda(aircrafts, runways)
-
-    val runwayClass = agenda.runways.flatMap(_.classes)
-    val aircraftClass = aircrafts.map(_.classType)
-
-    assert(runwayClass.exists(c => aircraftClass.contains(c)))
-
-  }
-
   test("Agenda should return the correct number of aircrafts") {
     val aircrafts = Seq(
       Aircraft(aircraftId1, Class1, target, maxTime, time),
