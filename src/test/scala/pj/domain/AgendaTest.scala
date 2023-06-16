@@ -21,13 +21,24 @@ class AgendaTest extends AnyFunSuite:
   val time = Some(5)
 
   test("Adding aircrafts to an agenda") {
+    val runway1 = Seq(Runway(runwayId1, List(Class1, Class2), List()))
     val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime, time)
     val aircraft2 = Aircraft(aircraftId2, Class2, target, maxTime, time)
-    val agenda = Agenda(Seq.empty, Seq.empty)
+    val agenda = Agenda(Seq.empty, runway1)
 
     val result = Agenda.addAircrafts(Seq(aircraft1, aircraft2), agenda)
 
-    assert(result == Right(Agenda(Seq(aircraft1, aircraft2), Seq.empty)))
+    val resultExpected = Right(
+      Agenda(
+        List(
+          Aircraft(aircraftId1, Class1, 10, 900, Some(5)),
+          Aircraft(aircraftId2, Class2, 10, 900, Some(5))
+        ),
+        List(Runway(runwayId1, List(Class1, Class2), List()))
+      )
+    )
+
+    assert(result == resultExpected)
   }
 
   test("Adding duplicate aircraft to an agenda should result in an error") {
@@ -36,7 +47,7 @@ class AgendaTest extends AnyFunSuite:
 
     val result = Agenda.addAircraft(aircraft1, agenda)
 
-    assert(result == Left(RepeatedAircraftId(aircraftId1)))
+    assert(result == Left(NoRunwaysAvailable("1")))
   }
 
   test("Adding runways to an agenda") {
