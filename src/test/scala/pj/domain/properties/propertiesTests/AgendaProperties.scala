@@ -1,11 +1,11 @@
-package pj.domain.properties
+package domain.properties
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
+import domain.Agenda
 import domain.properties.RunwaysProperties.genRunways
 import domain.properties.AircraftsProperties.genAircrafts
-import domain.Agenda
 
 
 object AgendaProperties extends Properties("AgendaProperties"):
@@ -16,7 +16,6 @@ object AgendaProperties extends Properties("AgendaProperties"):
             aircrafts <- genAircrafts(runways)
         yield Agenda(aircrafts.sortBy(_.target), runways)
         
-
     property("Generated Agenda") = forAll(genAgenda) { (agenda) =>
         val aircrafts = agenda.aircrafts
         val runways = agenda.runways

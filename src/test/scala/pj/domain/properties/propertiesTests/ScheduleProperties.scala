@@ -1,18 +1,16 @@
-package pj.domain.properties
+package domain.properties
 
 import org.scalacheck.Gen
 import org.scalacheck.Prop.forAll
 import org.scalacheck.Properties
 import org.scalatest.run
-
 import pj.domain.Result
-
 import pj.domain.simpleTypes.*
-import domain.*
-import pj.domain.properties.AgendaProperties.genAgenda
 import pj.domain.schedule.ScheduleMS03.*
 import pj.domain.BruteForce.*
 import pj.domain.Plan.*
+import domain.*
+import domain.properties.AgendaProperties.genAgenda
 
 object ScheduleProperties extends Properties("ScheduleProperties"):
 
@@ -52,11 +50,7 @@ object ScheduleProperties extends Properties("ScheduleProperties"):
         _ => false,
         (runway) => {
           aircrafts.forall(a =>
-            runway.runways
-              .flatMap(
-                _.aircrafts.map(aircraft => (aircraft.id, aircraft.classType))
-              )
-              .contains(a.id, a.classType)
+            runway.runways.flatMap(_.aircrafts.map(aircraft => (aircraft.id, aircraft.classType))).contains(a.id, a.classType)
           )
         }
       )

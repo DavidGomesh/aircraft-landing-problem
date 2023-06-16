@@ -5,7 +5,6 @@ import org.scalacheck.Prop.forAll
 import org.scalacheck.Gen
 import domain.Runway
 import domain.Aircraft
-import domain.AttributesGenerator.genAircraftId
 import simpleTypes.identifier.*
 import domain.AttributesGenerator.*
 import simpleTypes.integer.NonNegativeInt
@@ -16,10 +15,10 @@ object AircraftsProperties extends Properties("AircraftsProperties"):
 
     val min = 1
     val max = 6
-    val maxDelay = 0
+    val maxDelay = 900
     val numCharId = 4
 
-    def genAircrafts(runways: Seq[Runway]): Gen[List[Aircraft]] =
+    def genAircrafts(runways: Seq[Runway]): Gen[Seq[Aircraft]] =
       for 
         num <- Gen.choose(min, max)
         lid <- Gen.listOfN(num, genAircraftId(numCharId))
@@ -30,7 +29,7 @@ object AircraftsProperties extends Properties("AircraftsProperties"):
       for 
         classType <-  Gen.oneOf(runways.flatMap(_.classes))
         target <- genAircraftTarget(min, maxDelay)
-        maxDelayTime <- Gen.frequency(1 -> (target + max), 5 -> (target + maxDelay))  
+        maxDelayTime = target + maxDelay
       yield Aircraft(id, classType, target, maxDelayTime, Some(0))
 
 

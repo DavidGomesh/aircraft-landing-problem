@@ -87,12 +87,12 @@ class ScheduleMS03Test extends AnyFunSuite:
     assert(result.isLeft)
   }
 
-  test("createGroups should divide the aircraft list into groups of size 10") {
+  test("createGroups should divide the aircraft Seq into groups of size 10") {
 
-    val aircraftList: List[Aircraft] = (1 to 15).toList.map { i =>
+    val aircraftSeq: Seq[Aircraft] = (1 to 15).toList.map { i =>
       Aircraft(s"aircraftI$i", Class1, i, 900, Some(0))
     }
-    val groups = createGroups(aircraftList)
+    val groups = createGroups(aircraftSeq)
 
     assert(groups.lengthIs == 2)
     assert(groups(0).lengthIs == 10)
@@ -105,36 +105,36 @@ class ScheduleMS03Test extends AnyFunSuite:
 
     assert(partitions.lengthIs == 4)
 
-    val expectedPartitions = List(
+    val expectedPartitions = Seq(
       (
-        List(),
-        List(
+        Seq(),
+        Seq(
           Aircraft(aircraftId1, Class2, 10, 900, Some(0)),
           Aircraft(aircraftId2, Class1, 15, 900, Some(0)),
           Aircraft(aircraftId3, Class3, 20, 900, Some(0))
         )
       ),
       (
-        List(Aircraft(aircraftId1, Class2, 10, 900, Some(0))),
-        List(
+        Seq(Aircraft(aircraftId1, Class2, 10, 900, Some(0))),
+        Seq(
           Aircraft(aircraftId2, Class1, 15, 900, Some(0)),
           Aircraft(aircraftId3, Class3, 20, 900, Some(0))
         )
       ),
       (
-        List(
+        Seq(
           Aircraft(aircraftId1, Class2, 10, 900, Some(0)),
           Aircraft(aircraftId2, Class1, 15, 900, Some(0))
         ),
-        List(Aircraft(aircraftId3, Class3, 20, 900, Some(0)))
+        Seq(Aircraft(aircraftId3, Class3, 20, 900, Some(0)))
       ),
       (
-        List(
+        Seq(
           Aircraft(aircraftId1, Class2, 10, 900, Some(0)),
           Aircraft(aircraftId2, Class1, 15, 900, Some(0)),
           Aircraft(aircraftId3, Class3, 20, 900, Some(0))
         ),
-        List()
+        Seq()
       )
     )
 
@@ -149,13 +149,13 @@ class ScheduleMS03Test extends AnyFunSuite:
       Seq(
         Runway(
           runwayId1,
-          List(Class2, Class5),
-          List(Aircraft(aircraftId1, Class2, 10, 900, Some(10)))
+          Seq(Class2, Class5),
+          Seq(Aircraft(aircraftId1, Class2, 10, 900, Some(10)))
         ),
         Runway(
           runwayId2,
-          List(Class1, Class5, Class3),
-          List(
+          Seq(Class1, Class5, Class3),
+          Seq(
             Aircraft(aircraftId2, Class1, 15, 900, Some(15)),
             Aircraft(aircraftId3, Class3, 20, 900, Some(75))
           )
@@ -175,8 +175,8 @@ class ScheduleMS03Test extends AnyFunSuite:
     val expectedCombinations = Seq(
       Runway(
         runwayId1,
-        List(Class2, Class5, Class3, Class1),
-        List(
+        Seq(Class2, Class5, Class3, Class1),
+        Seq(
           Aircraft(aircraftId3, Class3, 20, 900, Some(20)),
           Aircraft(aircraftId1, Class2, 10, 900, Some(177)),
           Aircraft(aircraftId2, Class1, 15, 900, Some(308))
@@ -184,8 +184,8 @@ class ScheduleMS03Test extends AnyFunSuite:
       ),
       Runway(
         runwayId1,
-        List(Class2, Class5, Class3, Class1),
-        List(
+        Seq(Class2, Class5, Class3, Class1),
+        Seq(
           Aircraft(aircraftId1, Class2, 10, 900, Some(0)),
           Aircraft(aircraftId3, Class3, 20, 900, Some(60)),
           Aircraft(aircraftId2, Class1, 15, 900, Some(256))
@@ -193,8 +193,8 @@ class ScheduleMS03Test extends AnyFunSuite:
       ),
       Runway(
         runwayId1,
-        List(Class2, Class5, Class3, Class1),
-        List(
+        Seq(Class2, Class5, Class3, Class1),
+        Seq(
           Aircraft(aircraftId1, Class2, 10, 900, Some(0)),
           Aircraft(aircraftId2, Class1, 15, 900, Some(0)),
           Aircraft(aircraftId3, Class3, 20, 900, Some(60))

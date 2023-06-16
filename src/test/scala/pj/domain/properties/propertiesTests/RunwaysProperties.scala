@@ -10,7 +10,7 @@ import domain.AttributesGenerator.genClassRunway
 object RunwaysProperties extends Properties("RunwaysProperties"):
 
     val min = 1
-    val max = 5
+    val max = 10
     val numCharId = 4
 
     def genRunways: Gen[Seq[Runway]] = 

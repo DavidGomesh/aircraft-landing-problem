@@ -26,8 +26,8 @@ class SeparationTest extends AnyFunSuite:
     val runway =
       Runway(
         runwayId1,
-        List(Class1, Class2),
-        List(Aircraft(aircraftId3, Class1, target, maxTime))
+        Seq(Class1, Class2),
+        Seq(Aircraft(aircraftId3, Class1, target, maxTime))
       )
     val aircraft = Aircraft(aircraftId2, Class1, target, maxTime)
     assert(Separation.minTime(aircraft, runway) == 82)
@@ -37,6 +37,6 @@ class SeparationTest extends AnyFunSuite:
     val aircraft1 = Aircraft(aircraftId1, Class1, target, maxTime, time)
     val updateAircraft1 =
       Aircraft(aircraftId2, Class1, target, maxTime, time)
-    val runway = Runway(runwayId1, List(Class1, Class2), List(updateAircraft1))
+    val runway = Runway(runwayId1, Seq(Class1, Class2), Seq(updateAircraft1))
     Separation.delay(aircraft1, runway) == 87
   }
