@@ -10,12 +10,11 @@ enum DomainError:
     // XML Erros
     case IOFileProblem(error: String)
     case XMLError(error: String)
-
+    
     case RepeatedAircraftId(error: String)
     case RepeatedRunwayId(error: String)
 
-    // Simple Types Errors
-    // Integers
+
     case NonNegativeIntError(error: String)
     case PositiveIntError(error: String)
 
