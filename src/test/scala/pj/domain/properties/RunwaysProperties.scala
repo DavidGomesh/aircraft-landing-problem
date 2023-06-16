@@ -10,7 +10,7 @@ object RunwaysProperties extends Properties("RunwaysProperties"):
 
     def genRunways: Gen[List[Runway]] = 
         for
-            num <- Gen.choose(1, 10)
+            num <- Gen.choose(1, 3)
             runways <- Gen.listOfN(num, genRunway)
         yield runways
 

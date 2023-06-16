@@ -20,6 +20,8 @@ enum DomainError:
     case PositiveIntError(error: String)
 
     case ScheduleError(error: String)
+
+    case NoRunwaysAvailable(error: String)
     case RunwayNotCompatible(error: String)
     case OperationTimeWindow(error: String)
 

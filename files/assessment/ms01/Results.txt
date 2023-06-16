@@ -1,0 +1,23 @@
+
+FRA01 = Solution is 32.93% BETTER than MS01 (949)
+FRA02 = Solution is 36.23% BETTER than MS01 (947)
+LHR01 = Solution is 31.13% BETTER than MS01 (6908)
+LHR02 = Solution is 28.46% BETTER than MS01 (9412)
+LHR03 = Solution is 43.95% BETTER than MS01 (7948)
+
+VAL00 = Solution has THE SAME cost as MS01  (114)
+VAL01 = Solution is 11.54% BETTER than MS01 (115)
+VAL02 = Solution has THE SAME cost as MS01  (115)
+VAL03 = Solution has THE SAME cost as MS01  (44)
+VAL04 = Solution is 40.00% BETTER than MS01 (114)
+VAL05 = Solution has THE SAME cost as MS01  (44)
+VAL06 = Solution has THE SAME cost as MS01  (389)
+VAL07 = Solution has THE SAME cost as MS01  (183)
+VAL08 = Solution has THE SAME cost as MS01  (8)
+VAL09 = Solution has THE SAME cost as MS01  (234)
+VAL10 = Solution is 74.06% BETTER than MS01 (76)
+
+
+
+
+
